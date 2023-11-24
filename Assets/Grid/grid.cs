@@ -29,7 +29,7 @@ public class Grid : MonoBehaviour
     public void GenerateRoom()
     {
         float random = Random.value;
-        int numberOfRooms = (int)Mathf.Floor((random * 2) + 5 + (floorLevel * 2));
+        int numberOfRooms = (int)Mathf.Floor((random * 2) + 10 + (floorLevel * 2));
         Debug.Log("We will have " + numberOfRooms + "rooms normally..");
 
         ToInstantiateRoom(3, 5);
@@ -69,7 +69,6 @@ public class Grid : MonoBehaviour
         {
             int rand = possibilities[(int)Mathf.Floor(Random.value * possibilities.Count)];
             possibilities.Remove(rand);
-
             int newX = roomCoordinate.x;
             int newY = roomCoordinate.y;
 
@@ -99,7 +98,13 @@ public class Grid : MonoBehaviour
             }
         }
 
-        if (nbAdjacentRooms < 2 && nbAdjacentRooms > 0 && (int)Mathf.Floor(Random.value*2) == 0)
+        if (nbAdjacentRooms < 2 
+            && nbAdjacentRooms > 0 
+                && (int)Mathf.Floor(Random.value*2) == 0 
+                    && roomCoordinate.x > 0 
+                        && roomCoordinate.y > 0
+                            && roomCoordinate.x < 9
+                                && roomCoordinate.y < 8)
         {
             ToInstantiateRoom(roomCoordinate.x, roomCoordinate.y);
             Debug.Log($"Instantiating room at {roomCoordinate.x}-{roomCoordinate.y}");

@@ -259,13 +259,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc23a40f9be937048ab80248698d8b3b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Height: 8
-  Width: 9
-  FloorLevel: 1
+  height: 8
+  width: 9
+  floorLevel: 1
   cam: {fileID: 519420032}
-  Cell: {fileID: 672022843222156931, guid: acd0aea6954242d42b417d7784b4c25f, type: 3}
-  Room: {fileID: -8625823655419273108, guid: 48cb4146f04ee9747bbddf4eb8612cf3, type: 3}
-  Rooms: []
+  cellPrefab: {fileID: 672022843222156931, guid: acd0aea6954242d42b417d7784b4c25f, type: 3}
+  roomPrefab: {fileID: -8625823655419273108, guid: 48cb4146f04ee9747bbddf4eb8612cf3, type: 3}
+  rooms: []
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
