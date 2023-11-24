@@ -1,10 +1,10 @@
 using System;
-using Systeme.Collections.Generic;
 
-Public class Entity
+public class Entity
 {
+    private int strength;
 
-    // Attrubuts
+    // Attributs
     public string Name { get; set; }
     public int Life { get; set; }
     public int Mana { get; set; }
@@ -14,7 +14,7 @@ Public class Entity
     public int PositionY { get; set; }
 
     // Constructeur
-    public Antity(string Name, int Life, int Mana, int Experience, int Level, int PositionX, int PositionY)
+    public Entity(string name, int life, int mana, int experience, int level, int positionX, int positionY)
     {
         Name = name;
         Life = life;
@@ -25,19 +25,27 @@ Public class Entity
         PositionY = positionY;
     }
 
-    // Deplacement 
+    public Entity(string name, int life, int strength, int level, int positionX, int positionY)
+    {
+        Name=name;
+        Life=life;
+        this.strength=strength;
+        Level=level;
+        PositionX=positionX;
+        PositionY=positionY;
+    }
+
+    // Deplacement
     public void Move(int newX, int newY)
     {
-        Console.writeLine($"{Name se déplace à la position ({newX}, {newY}).");
-		PositionX = nexX;
-		PositionY = newY;
-	}
+        Console.WriteLine($"{Name} se déplace à la position ({newX}, {newY}).");
+        PositionX = newX;
+        PositionY = newY;
+    }
 
     // Attaque
     public void Attack()
-        {
-            Console.WriteLine($"{Name} Attaque ! ");
-        }
-
-
+    {
+        Console.WriteLine($"{Name} attaque !");
+    }
 }
