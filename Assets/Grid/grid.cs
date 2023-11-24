@@ -1,59 +1,125 @@
-
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class Grid : MonoBehaviour
 {
-
-    [SerializeField] private int Height = 8;
-    [SerializeField] private int Width = 9;
-    [SerializeField] private int FloorLevel = 1;
+    [SerializeField] private int height = 8;
+    [SerializeField] private int width = 9;
+    [SerializeField] private int floorLevel = 1;
     [SerializeField] private Transform cam;
-    [SerializeField] private Cell Cell;
-    [SerializeField] private Room Room;
-    [SerializeField] private List<Room> Rooms = new();
-
+    [SerializeField] private Cell cellPrefab;
+    [SerializeField] private Room roomPrefab;
+    [SerializeField] private List<Room> rooms = new();
+    private List<(int x, int y)> coordinatesOfPotentialRooms = new();
 
     public void GenerateGrid()
     {
-
-        for (int i = 0; i < Width; i++)
+        for (int i = 0; i < width; i++)
         {
-            for (int j = 0; j < Height; j++)
+            for (int j = 0; j < height; j++)
             {
-                Cell emptyCell = Instantiate(Cell, new Vector3(i, j), Quaternion.identity);
-                emptyCell.name = $"Cell {i}{j}";
+                Cell emptyCell = Instantiate(cellPrefab, new Vector3(i, j), Quaternion.identity);
+                emptyCell.name = $"Cell {i} {j}";
             }
         }
-        cam.position = new Vector3((float)Width/2 -0.5f, (float)Height/2 -0.5f, -10);
+        cam.position = new Vector3((float)width / 2 - 0.5f, (float)height / 2 - 0.5f, -10);
     }
+
     public void GenerateRoom()
     {
         float random = Random.value;
-        int numberOfRooms = (int)Mathf.Floor((random*2) + 5 + (FloorLevel * 2));
-        while (Rooms.Count < 1)
-        {
-            ToInstantiateRoom(3, 5);
+        int numberOfRooms = (int)Mathf.Floor((random * 2) + 5 + (floorLevel * 2));
+        Debug.Log("We will have " + numberOfRooms + "rooms normally..");
 
-        }
-    }
-    public void ToInstantiateRoom(int i,int j)
-    {
-        var room = Instantiate(Room, new Vector3(i, j), Quaternion.identity);
-        room.name = $"Room{i}{j}";
-        if (!Rooms.Contains(room))
+        ToInstantiateRoom(3, 5);
+        while (rooms.Count < numberOfRooms)
         {
-            Rooms.Add(room);
+            if (coordinatesOfPotentialRooms.Count == 0)
+            {
+                DoICreateARoom((3, 5));
+            }
+            else
+            {
+                int rand = (int)Mathf.Floor(Random.value * coordinatesOfPotentialRooms.Count);
+                Debug.Log(rand);
+                DoICreateARoom(coordinatesOfPotentialRooms[rand]);
+            }
         }
     }
+
+    public (int x, int y) ToInstantiateRoom(int i, int j)
+    {
+        var room = Instantiate(roomPrefab, new Vector3(i, j), Quaternion.identity);
+        room.name = $"Room {i} {j}";
+        bool roomExists = rooms.Any(futurRoom => futurRoom.name == room.name);
+        if (!roomExists)
+        {
+            Debug.Log($"Adding room number: {i}-{j}");
+            rooms.Add(room);
+        }
+        return (i, j);
+    }
+
+    public void DoICreateARoom((int x, int y) roomCoordinate)
+    {
+        int nbAdjacentRooms = 0;
+        List<int> possibilities = new() { 0, 1, 2, 3 };
+        while (possibilities.Count > 0 && nbAdjacentRooms < 2)
+        {
+            int rand = possibilities[(int)Mathf.Floor(Random.value * possibilities.Count)];
+            possibilities.Remove(rand);
+
+            int newX = roomCoordinate.x;
+            int newY = roomCoordinate.y;
+
+            switch (rand)
+            {
+                case 0:
+                    newY += 1;
+                    break;
+                case 1:
+                    newY -= 1;
+                    break;
+                case 2:
+                    newX += 1;
+                    break;
+                case 3:
+                    newX -= 1;
+                    break;
+            }
+
+            if (CheckNeighbourCell(newX, newY))
+            {
+                coordinatesOfPotentialRooms.Add((newX, newY));
+            }
+            else
+            {
+                nbAdjacentRooms++;
+            }
+        }
+
+        if (nbAdjacentRooms < 2 && nbAdjacentRooms > 0 && (int)Mathf.Floor(Random.value*2) == 0)
+        {
+            ToInstantiateRoom(roomCoordinate.x, roomCoordinate.y);
+            Debug.Log($"Instantiating room at {roomCoordinate.x}-{roomCoordinate.y}");
+        }
+    }
+
+    public bool CheckNeighbourCell(int x, int y)
+    {
+        return (!rooms.Any(room => room.name == $"Room {x} {y}"));
+    }
+
     void Start()
     {
         GenerateGrid();
         GenerateRoom();
-    }
-
-    void Update()
-    {
-
+        Debug.Log($"Total Rooms: {rooms.Count}");
+        foreach ((int x, int y) coord in coordinatesOfPotentialRooms)
+        {
+            Debug.Log(coord.ToString());
+        }
+        
     }
 }
