@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class Player : Entity
 {
-
-    int x = 0;
-    int y = 0;
-    int z = 0;
+    public MainGrid grid;
+    float x;
+    float y;
+    float z;
 
     // Attributs
     public Inventory PlayerInventory { get; set; }
@@ -57,8 +57,11 @@ public class Player : Entity
 
     public void Start()
     {
-
-        transform.position = new Vector3(x, y, z);
+        Transform startPosition = grid.SpawnPlayer();
+        transform.position = startPosition.position;
+        x = startPosition.position.x;
+        y = startPosition.position.y;
+        z = startPosition.position.z;
     }
 
     public void Update()

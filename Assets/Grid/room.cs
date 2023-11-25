@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Room : MonoBehaviour
 {
+    public (int x, int y) coordinate { get; set; }
     // Start is called before the first frame update
     void Start()
     {

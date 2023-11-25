@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class Grid : MonoBehaviour
+public class MainGrid : MonoBehaviour
 {
     [SerializeField] private int height = 8;
     [SerializeField] private int width = 9;
@@ -11,7 +11,8 @@ public class Grid : MonoBehaviour
     [SerializeField] private Cell cellPrefab;
     [SerializeField] private Room roomPrefab;
     [SerializeField] private List<Room> rooms = new();
-    private List<(int x, int y)> coordinatesOfPotentialRooms = new();
+
+    private readonly List<(int x, int y)> coordinatesOfPotentialRooms = new();
 
     public void GenerateGrid()
     {
@@ -48,17 +49,18 @@ public class Grid : MonoBehaviour
         }
     }
 
-    public (int x, int y) ToInstantiateRoom(int i, int j)
+    public (int x, int y) ToInstantiateRoom(int x, int y)
     {
-        var room = Instantiate(roomPrefab, new Vector3(i, j), Quaternion.identity);
-        room.name = $"Room {i} {j}";
+        var room = Instantiate(roomPrefab, new Vector3(x, y), Quaternion.identity);
+        room.name = $"Room {x} {y}";
+        room.coordinate = (x,y);
         bool roomExists = rooms.Any(futurRoom => futurRoom.name == room.name);
         if (!roomExists)
         {
-            Debug.Log($"Adding room number: {i}-{j}");
+            Debug.Log($"Adding room number: {x}-{y}");
             rooms.Add(room);
         }
-        return (i, j);
+        return (x, y);
     }
 
     public void DoICreateARoom((int x, int y) roomCoordinate)
@@ -116,10 +118,43 @@ public class Grid : MonoBehaviour
         return (!rooms.Any(room => room.name == $"Room {x} {y}"));
     }
 
+    public Transform SpawnPlayer()
+    {
+        int index = Random.Range(0,rooms.Count());
+        Room startRoom = rooms[index];
+        SpawnBoss(startRoom);
+        return startRoom.transform;
+    }
+    public Transform SpawnBoss(Room playerStartRoom)
+    {
+        float maxDistance;
+        Room BossRoom = new();
+        foreach (Room room in rooms)
+        {
+            maxDistance = Mathf.Abs(DistanceBtwRooms(room, playerStartRoom));
+            if (DistanceBtwRooms(room, playerStartRoom) > maxDistance)
+            {
+                BossRoom = room;
+            }
+        }
+        return BossRoom.transform;
+        
+    }
+    private float DistanceBtwRooms(Room room, Room playerStartRoom)
+    {
+        float playerCoordX = playerStartRoom.coordinate.x;
+        float playerCoordY = playerStartRoom.coordinate.y;
+        float roomCoordX = room.coordinate.x;
+        float roomCoordY = room.coordinate.y;
+        Debug.Log(Mathf.Sqrt(Mathf.Pow(roomCoordX-playerCoordX, 2) + Mathf.Pow(roomCoordY-playerCoordY, 2)));
+        return Mathf.Sqrt(Mathf.Pow(roomCoordX-playerCoordX, 2) + Mathf.Pow(roomCoordY-playerCoordY, 2));
+    }
+
     void Start()
     {
         GenerateGrid();
         GenerateRoom();
+        SpawnPlayer();
         Debug.Log($"Total Rooms: {rooms.Count}");
         foreach ((int x, int y) coord in coordinatesOfPotentialRooms)
         {
