@@ -1,13 +1,27 @@
 using System;
 using System.Collections.Generic;
+using UnityEngine;
 
+public class Monsters : MonoBehaviour
 {
     public MainGrid grid;
     // Constructeur
-    public Monster(string name, int life, int level, int positionX, int positionY, int strength)
-        : base(name, life, level, positionX, positionY, strength)
-    {
+    public string Name { get; set; }
+    public int Life { get; set; }
+    public int Level { get; set; }
+    public int PositionX { get; set; }
+    public int PositionY { get; set; }
+    public int Strength { get; set; }
 
+    // Constructor
+    public Monsters(string name, int life, int level, int positionX, int positionY, int strength)
+    {
+        Name = name;
+        Life = life;
+        Level = level;
+        PositionX = positionX;
+        PositionY = positionY;
+        Strength = strength;
     }
 
     // Donner de l'expérience
@@ -23,8 +37,10 @@ using System.Collections.Generic;
         Console.WriteLine($"{Name} gives {item}.");
         // Ajoutez le code pour donner un objet selon vos besoins
     }
-    public Start()
+    void Start()
     {
-    transform.position = grid.SpawnBoss();
+        transform.position = grid.SpawnBoss(grid.startRoom);
+        Debug.Log($"La position du boss est {transform.position}");
+
     }
 }

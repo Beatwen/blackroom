@@ -11,6 +11,8 @@ public class MainGrid : MonoBehaviour
     [SerializeField] private Cell cellPrefab;
     [SerializeField] private Room roomPrefab;
     [SerializeField] private List<Room> rooms = new();
+    public Room startRoom;
+    public Room bossRoom;
 
     private readonly List<(int x, int y)> coordinatesOfPotentialRooms = new();
 
@@ -43,7 +45,6 @@ public class MainGrid : MonoBehaviour
             else
             {
                 int rand = (int)Mathf.Floor(Random.value * coordinatesOfPotentialRooms.Count);
-                Debug.Log(rand);
                 DoICreateARoom(coordinatesOfPotentialRooms[rand]);
             }
         }
@@ -109,7 +110,6 @@ public class MainGrid : MonoBehaviour
                                 && roomCoordinate.y < 8)
         {
             ToInstantiateRoom(roomCoordinate.x, roomCoordinate.y);
-            Debug.Log($"Instantiating room at {roomCoordinate.x}-{roomCoordinate.y}");
         }
     }
 
@@ -118,27 +118,26 @@ public class MainGrid : MonoBehaviour
         return (!rooms.Any(room => room.name == $"Room {x} {y}"));
     }
 
-    public Transform SpawnPlayer()
+    public Vector3 SpawnPlayer()
     {
         int index = Random.Range(0,rooms.Count());
-        Room startRoom = rooms[index];
+        startRoom = rooms[index];
         SpawnBoss(startRoom);
-        return startRoom.transform;
+        return startRoom.transform.position;
     }
-    public Transform SpawnBoss(Room playerStartRoom)
+    public Vector3 SpawnBoss(Room playerStartRoom)
     {
-        float maxDistance;
-        Room BossRoom = new();
+        Dictionary<Room,float> roomDistance = new();
+        Room BossRoom = playerStartRoom;
         foreach (Room room in rooms)
         {
-            maxDistance = Mathf.Abs(DistanceBtwRooms(room, playerStartRoom));
-            if (DistanceBtwRooms(room, playerStartRoom) > maxDistance)
-            {
-                BossRoom = room;
-            }
+            float distance = DistanceBtwRooms(room, playerStartRoom);
+            roomDistance.Add(room, distance);
         }
-        return BossRoom.transform;
-        
+        Dictionary<Room, float> sortedRoomDistance = roomDistance.OrderBy(r => r.Value).ToDictionary(x => x.Key, x => x.Value); ;
+        var LastPair = sortedRoomDistance.Last();
+        BossRoom = LastPair.Key;
+        return BossRoom.transform.position; 
     }
     private float DistanceBtwRooms(Room room, Room playerStartRoom)
     {
@@ -146,7 +145,6 @@ public class MainGrid : MonoBehaviour
         float playerCoordY = playerStartRoom.coordinate.y;
         float roomCoordX = room.coordinate.x;
         float roomCoordY = room.coordinate.y;
-        Debug.Log(Mathf.Sqrt(Mathf.Pow(roomCoordX-playerCoordX, 2) + Mathf.Pow(roomCoordY-playerCoordY, 2)));
         return Mathf.Sqrt(Mathf.Pow(roomCoordX-playerCoordX, 2) + Mathf.Pow(roomCoordY-playerCoordY, 2));
     }
 
@@ -154,11 +152,5 @@ public class MainGrid : MonoBehaviour
     {
         GenerateGrid();
         GenerateRoom();
-        SpawnPlayer();
-        Debug.Log($"Total Rooms: {rooms.Count}");
-        foreach ((int x, int y) coord in coordinatesOfPotentialRooms)
-        {
-            Debug.Log(coord.ToString());
-        }
     }
 }

@@ -54,14 +54,20 @@ public class Player : Entity
     {
         Console.WriteLine($"{Name} gagne {experiencePoints} points d'expérience !");
     }
+    public Transform GetPlayerLocation()
+    {
+        return transform;
+    }
 
     public void Start()
     {
-        Transform startPosition = grid.SpawnPlayer();
-        transform.position = startPosition.position;
-        x = startPosition.position.x;
-        y = startPosition.position.y;
-        z = startPosition.position.z;
+        
+        Vector3 startPosition = grid.SpawnPlayer();
+        x = startPosition.x;
+        y = startPosition.y;
+        z = startPosition.z;
+        transform.position = new Vector3( x, y, z );
+
     }
 
     public void Update()
