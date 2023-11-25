@@ -1,8 +1,11 @@
 using System;
+using UnityEngine;
 
-public class Entity
+public class Entity : MonoBehaviour
 {
     private int strength;
+    private int v1;
+    private int v2;
 
     // Attributs
     public string Name { get; set; }
@@ -12,6 +15,7 @@ public class Entity
     public int Level { get; set; }
     public int PositionX { get; set; }
     public int PositionY { get; set; }
+    // public int Strength { get; set; }
 
     // Constructeur
     public Entity(string name, int life, int mana, int experience, int level, int positionX, int positionY)
@@ -25,27 +29,28 @@ public class Entity
         PositionY = positionY;
     }
 
-    public Entity(string name, int life, int strength, int level, int positionX, int positionY)
+    public Entity(string name, int life, int strength, int level, int v1, int v2)
     {
-        Name=name;
-        Life=life;
-        this.strength=strength;
-        Level=level;
-        PositionX=positionX;
-        PositionY=positionY;
+        this.name = name;
+        Life = life;
+        this.strength = strength;
+        Level = level;
+        this.v1 = v1;
+        this.v2 = v2;
     }
 
-    // Deplacement
+    // Deplacement 
     public void Move(int newX, int newY)
     {
-        Console.WriteLine($"{Name} se déplace à la position ({newX}, {newY}).");
-        PositionX = newX;
-        PositionY = newY;
-    }
+			PositionX = newX;
+			PositionY = newY;
+	}
 
     // Attaque
     public void Attack()
-    {
-        Console.WriteLine($"{Name} attaque !");
+        {
+            Console.WriteLine($"{Name} Attaque ! ");
+        }
+
+
     }
-}

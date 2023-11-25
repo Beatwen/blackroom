@@ -1,8 +1,14 @@
 using System;
 using System.Collections.Generic;
+using UnityEngine;
 
 public class Player : Entity
 {
+
+    int x = 0;
+    int y = 0;
+    int z = 0;
+
     // Attributs
     public Inventory PlayerInventory { get; set; }
 
@@ -47,5 +53,30 @@ public class Player : Entity
     public void GainExperience(int experiencePoints)
     {
         Console.WriteLine($"{Name} gagne {experiencePoints} points d'expérience !");
+    }
+
+    public void Start()
+    {
+
+        transform.position = new Vector3(x, y, z);
+    }
+
+    public void Update()
+    {
+        if ( Input.GetKeyDown(KeyCode.UpArrow) && y < 7) {
+            transform.position = new Vector3 (x, ++y, z);
+        }
+        if (Input.GetKeyDown(KeyCode.DownArrow) && y > 0)
+        {
+            transform.position = new Vector3(x, --y, z);
+        }
+        if (Input.GetKeyDown(KeyCode.RightArrow) && x < 8)
+        {
+            transform.position = new Vector3(++x, y, z);
+        }
+        if (Input.GetKeyDown(KeyCode.LeftArrow) && x > 0)
+        {
+            transform.position = new Vector3(--x, y, z);
+        }
     }
 }
