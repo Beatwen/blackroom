@@ -125,6 +125,5 @@ public class Grid : MonoBehaviour
         {
             Debug.Log(coord.ToString());
         }
-        
     }
 }
