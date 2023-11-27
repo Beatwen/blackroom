@@ -39,8 +39,6 @@ public class Monsters : MonoBehaviour
     }
     void Start()
     {
-        transform.position = grid.SpawnBoss(grid.startRoom);
-        Debug.Log($"La position du boss est {transform.position}");
 
     }
 }

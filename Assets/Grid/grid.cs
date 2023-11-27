@@ -10,7 +10,7 @@ public class MainGrid : MonoBehaviour
     [SerializeField] private Transform cam;
     [SerializeField] private Cell cellPrefab;
     [SerializeField] private Room roomPrefab;
-    [SerializeField] private List<Room> rooms = new();
+    [SerializeField] public List<Room> rooms = new();
     public Room startRoom;
     public Room bossRoom;
 
@@ -35,7 +35,7 @@ public class MainGrid : MonoBehaviour
         int numberOfRooms = (int)Mathf.Floor((random * 2) + 10 + (floorLevel * 2));
         Debug.Log("We will have " + numberOfRooms + "rooms normally..");
 
-        ToInstantiateRoom(3, 5);
+        InstantiateRoom(3, 5);
         while (rooms.Count < numberOfRooms)
         {
             if (coordinatesOfPotentialRooms.Count == 0)
@@ -49,8 +49,18 @@ public class MainGrid : MonoBehaviour
             }
         }
     }
+    public void GenerateRoomFunction()
+    {
+        foreach(Room room in rooms)
+        {
+            if (room != startRoom && room != bossRoom)
+            {
 
-    public (int x, int y) ToInstantiateRoom(int x, int y)
+            }
+        }
+    }
+
+    public (int x, int y) InstantiateRoom(int x, int y)
     {
         var room = Instantiate(roomPrefab, new Vector3(x, y), Quaternion.identity);
         room.name = $"Room {x} {y}";
@@ -109,7 +119,7 @@ public class MainGrid : MonoBehaviour
                             && roomCoordinate.x < 9
                                 && roomCoordinate.y < 8)
         {
-            ToInstantiateRoom(roomCoordinate.x, roomCoordinate.y);
+            InstantiateRoom(roomCoordinate.x, roomCoordinate.y);
         }
     }
 
@@ -134,7 +144,7 @@ public class MainGrid : MonoBehaviour
             float distance = DistanceBtwRooms(room, playerStartRoom);
             roomDistance.Add(room, distance);
         }
-        Dictionary<Room, float> sortedRoomDistance = roomDistance.OrderBy(r => r.Value).ToDictionary(x => x.Key, x => x.Value); ;
+        Dictionary<Room, float> sortedRoomDistance = roomDistance.OrderBy(r => r.Value).ToDictionary(x => x.Key, x => x.Value);
         var LastPair = sortedRoomDistance.Last();
         BossRoom = LastPair.Key;
         return BossRoom.transform.position; 
@@ -147,10 +157,15 @@ public class MainGrid : MonoBehaviour
         float roomCoordY = room.coordinate.y;
         return Mathf.Sqrt(Mathf.Pow(roomCoordX-playerCoordX, 2) + Mathf.Pow(roomCoordY-playerCoordY, 2));
     }
-
+    public Room GetRoom((float x, float y ) coordinates)
+    {
+        
+        return rooms.Find(room => room.coordinate == coordinates);
+    }
     void Start()
     {
         GenerateGrid();
         GenerateRoom();
+        GenerateRoomFunction();
     }
 }

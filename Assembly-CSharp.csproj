@@ -60,15 +60,18 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Player\Iventory.cs" />
+    <Compile Include="Assets\Grid\BossRoom.cs" />
     <Compile Include="Assets\Grid\grid.cs" />
     <Compile Include="Assets\Objet\Objet.cs" />
     <Compile Include="Assets\Objet\Weapon.cs" />
     <Compile Include="Assets\Grid\room.cs" />
+    <Compile Include="Assets\Grid\GameManager.cs" />
     <Compile Include="Assets\Objet\Potion.cs" />
     <Compile Include="Assets\Grid\cell.cs" />
     <Compile Include="Assets\Objet\XP_Potion.cs" />
     <Compile Include="Assets\Monsters\Enemy.cs" />
     <Compile Include="Assets\Player\Spell.cs" />
+    <Compile Include="Assets\Grid\ChestRoom.cs" />
     <Compile Include="Assets\Player\Player.cs" />
     <Compile Include="Assets\Entity\Entity.cs" />
   </ItemGroup>

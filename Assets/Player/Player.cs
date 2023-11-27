@@ -5,9 +5,11 @@ using UnityEngine;
 public class Player : Entity
 {
     public MainGrid grid;
-    float x;
-    float y;
-    float z;
+    
+    public float x;
+    public float y;
+    public float z;
+
 
     // Attributs
     public Inventory PlayerInventory { get; set; }
