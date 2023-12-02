@@ -36,6 +36,14 @@ public class Player : Entity
     }
 
     // Utiliser un sort
+    public void nepasmarcherla()
+    {
+        List<Room> rooms = grid.rooms;
+        foreach (var room in rooms)
+        {
+            (float x, float y) coordonneesDeMaPremierePiece = (room.coordinate);
+        }
+    }
     public void CastSpell(Spell spell)
     {
         Console.WriteLine($"{Name} is casting {spell.Name}.");
