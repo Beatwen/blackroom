@@ -1,0 +1,67 @@
+[1mdiff --git a/Assets/Objet/Weapon.cs b/Assets/Objet/Weapon.cs[m
+[1mindex bf34563..3bbd25f 100644[m
+[1m--- a/Assets/Objet/Weapon.cs[m
+[1m+++ b/Assets/Objet/Weapon.cs[m
+[36m@@ -3,19 +3,58 @@[m [musing System.Collections;[m
+ using System.Collections.Generic;[m
+ using UnityEngine;[m
+ [m
+[32m+[m[32mpublic enum WeaponType[m
+[32m+[m[32m{[m
+[32m+[m[32m    SwordOfTheDragon,[m
+[32m+[m[32m    ElvenLongbow,[m
+[32m+[m[32m    DwarvenWarhammer,[m
+[32m+[m[32m    MagesStaff,[m
+[32m+[m[32m    AssassinsDagger,[m
+[32m+[m[32m    PaladinsHolySword,[m
+[32m+[m[32m    RangersCrossbow,[m
+[32m+[m[32m    SorcerersWand,[m
+[32m+[m[32m    BarbarianBattleAxe,[m
+[32m+[m[32m    ThiefsThrowingKnives,[m
+[32m+[m[32m    WarlocksCursedBlade,[m
+[32m+[m[32m    ClericsMace,[m
+[32m+[m[32m    NinjasShuriken,[m
+[32m+[m[32m    KnightsLance,[m
+[32m+[m[32m    DruidsElementalStaff[m
+[32m+[m[32m}[m
+[32m+[m
+ public class Weapon : Objet[m
+ {[m
+     public int Damage { get; set; }[m
+[32m+[m[32m    public WeaponType Type { get; private set; }[m
+ [m
+[31m-    public Weapon(string name, int damage) : base(name)[m
+[32m+[m[32m    private static readonly Dictionary<WeaponType, string> weaponNames = new Dictionary<WeaponType, string>[m
+     {[m
+[32m+[m[32m    { WeaponType.SwordOfTheDragon, "Épée du Dragon" },[m
+[32m+[m[32m    { WeaponType.ElvenLongbow, "Arc Elfe" },[m
+[32m+[m[32m    { WeaponType.DwarvenWarhammer, "Marteau de Guerre Nain" },[m
+[32m+[m[32m    { WeaponType.MagesStaff, "Bâton de Mage" },[m
+[32m+[m[32m    { WeaponType.AssassinsDagger, "Dague de l'Assassin" },[m
+[32m+[m[32m    { WeaponType.PaladinsHolySword, "Épée Sacrée du Paladin" },[m
+[32m+[m[32m    { WeaponType.RangersCrossbow, "Arbalète du Rôdeur" },[m
+[32m+[m[32m    { WeaponType.SorcerersWand, "Baguette du Sorcier" },[m
+[32m+[m[32m    { WeaponType.BarbarianBattleAxe, "Hache de Guerre Barbare" },[m
+[32m+[m[32m    { WeaponType.ThiefsThrowingKnives, "Couteaux de Lancer du Voleur" },[m
+[32m+[m[32m    { WeaponType.WarlocksCursedBlade, "Lame Maudite du Démoniste" },[m
+[32m+[m[32m    { WeaponType.ClericsMace, "Masse du Clerc" },[m
+[32m+[m[32m    { WeaponType.NinjasShuriken, "Shuriken du Ninja" },[m
+[32m+[m[32m    { WeaponType.KnightsLance, "Lance du Chevalier" },[m
+[32m+[m[32m    { WeaponType.DruidsElementalStaff, "Bâton Élémental du Druide" }[m
+[32m+[m[32m        // ... et ainsi de suite pour les autres armes[m
+[32m+[m[32m    };[m
+[32m+[m
+[32m+[m[32m    public Weapon(WeaponType type, int damage) : base(weaponNames[type])[m
+[32m+[m[32m    {[m
+[32m+[m[32m        Type = type;[m
+         Damage = damage;[m
+     }[m
+ [m
+     public override void Interact(Player player)[m
+     {[m
+[31m-        // Logique pour ajouter l'arme � l'inventaire du joueur[m
+[31m-        Console.WriteLine($"{player.Name} a trouv� l'arme {Name} avec {Damage} de d�g�ts!");[m
+[32m+[m[32m        Console.WriteLine($"{player.Name} a trouvé l'arme {Name} avec {Damage} de dégâts!");[m
+     }[m
+ }[m
+[31m-[m

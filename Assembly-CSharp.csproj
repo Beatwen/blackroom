@@ -74,6 +74,7 @@
     <Compile Include="Assets\Monsters\Enemy.cs" />
     <Compile Include="Assets\Player\Spell.cs" />
     <Compile Include="Assets\Grid\ChestRoom.cs" />
+    <Compile Include="Assets\Monsters\BossDragon.cs" />
     <Compile Include="Assets\Player\Player.cs" />
     <Compile Include="Assets\Entity\Entity.cs" />
   </ItemGroup>
