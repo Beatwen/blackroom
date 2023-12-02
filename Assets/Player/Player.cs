@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 public class Player : Entity
@@ -72,22 +73,42 @@ public class Player : Entity
 
     }
 
+    public bool CheckPlayerNeighbourCell(int x, int y)
+    {
+        return !grid.CheckNeighbourCell(x, y);
+    }
+
+
     public void Update()
     {
-        if ( Input.GetKeyDown(KeyCode.UpArrow) && y < 7) {
-            transform.position = new Vector3 (x, ++y, z);
-        }
-        if (Input.GetKeyDown(KeyCode.DownArrow) && y > 0)
+        int newX = (int)x;
+        int newY = (int)y;
+
+        if (Input.GetKeyDown(KeyCode.UpArrow))
         {
-            transform.position = new Vector3(x, --y, z);
+            newY += 1;
         }
-        if (Input.GetKeyDown(KeyCode.RightArrow) && x < 8)
+        else if (Input.GetKeyDown(KeyCode.DownArrow) && y > 0)
         {
-            transform.position = new Vector3(++x, y, z);
+            newY -= 1;
         }
-        if (Input.GetKeyDown(KeyCode.LeftArrow) && x > 0)
+        else if (Input.GetKeyDown(KeyCode.RightArrow) && x < 8)
         {
-            transform.position = new Vector3(--x, y, z);
+            newX += 1;
         }
+        else if (Input.GetKeyDown(KeyCode.LeftArrow) && x > 0)
+        {
+            newX -= 1;
+        }
+
+        if (CheckPlayerNeighbourCell(newX, newY))
+        {
+            transform.position = new Vector3(newX, newY, z);
+            x = newX;
+            y = newY;
+        }
+
     }
+
+
 }
