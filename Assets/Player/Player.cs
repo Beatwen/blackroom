@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class Player : Entity
 {
-     MainGrid grid;
+    [SerializedObject] public MainGrid grid;
     
     public float x;
     public float y;

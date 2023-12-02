@@ -10,7 +10,7 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{A1E16097-0CB6-8AB7-766C-4F81A81948F4}</ProjectGuid>
+    <ProjectGuid>{A13458CE-02D1-A2AB-AA12-3ECCE36CCDD8}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>Assembly-CSharp</AssemblyName>
@@ -62,13 +62,14 @@
     <Compile Include="Assets\Player\Iventory.cs" />
     <Compile Include="Assets\Grid\BossRoom.cs" />
     <Compile Include="Assets\Grid\grid.cs" />
+    <Compile Include="Assets\Player\PlayerFigthMode\FigthMode.cs" />
     <Compile Include="Assets\Objet\Objet.cs" />
     <Compile Include="Assets\Objet\Weapon.cs" />
     <Compile Include="Assets\Grid\room.cs" />
     <Compile Include="Assets\Grid\GameManager.cs" />
-    <Compile Include="Assets\PlayerFigthMode\FigthMode.cs" />
     <Compile Include="Assets\Objet\Potion.cs" />
     <Compile Include="Assets\Grid\cell.cs" />
+    <Compile Include="Assets\Player\SerializedObjectAttribute.cs" />
     <Compile Include="Assets\Objet\XP_Potion.cs" />
     <Compile Include="Assets\Monsters\Enemy.cs" />
     <Compile Include="Assets\Player\Spell.cs" />

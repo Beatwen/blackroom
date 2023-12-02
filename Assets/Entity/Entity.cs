@@ -40,11 +40,11 @@ public class Entity : MonoBehaviour
     }
 
     // Deplacement 
-    public void Move(int newX, int newY)
-    {
-			PositionX = newX;
-			PositionY = newY;
-	}
+ //   public void Move(int newX, int newY)
+ //   {
+	//		PositionX = newX;
+	//		PositionY = newY;
+	//}
 
     // Attaque
     public void Attack()
