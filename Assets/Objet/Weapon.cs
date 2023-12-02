@@ -29,21 +29,21 @@ public class Weapon : Objet
 
     private static readonly Dictionary<WeaponType, string> weaponNames = new Dictionary<WeaponType, string>
     {
-    { WeaponType.SwordOfTheDragon, "Épée du Dragon" },1
-    { WeaponType.ElvenLongbow, "Arc Elfe" },4
-    { WeaponType.DwarvenWarhammer, "Marteau de Guerre Nain" },5
-    { WeaponType.MagesStaff, "Bâton de Mage" },6
-    { WeaponType.AssassinsDagger, "Dague de l'Assassin" },7
-    { WeaponType.PaladinsHolySword, "Épée Sacrée du Paladin" },8
+    { WeaponType.SwordOfTheDragon, "Épée du Dragon" },
+    { WeaponType.ElvenLongbow, "Arc Elfe" },
+    { WeaponType.DwarvenWarhammer, "Marteau de Guerre Nain" },
+    { WeaponType.MagesStaff, "Bâton de Mage" },
+    { WeaponType.AssassinsDagger, "Dague de l'Assassin" },
+    { WeaponType.PaladinsHolySword, "Épée Sacrée du Paladin" },
     { WeaponType.RangersCrossbow, "Arbalète du Rôdeur" },
-    { WeaponType.SorcerersWand, "Baguette du Sorcier" },9
-    { WeaponType.BarbarianBattleAxe, "Hache de Guerre Barbare" },10
-    { WeaponType.ThiefsThrowingKnives, "Couteaux de Lancer du Voleur" },11
-    { WeaponType.WarlocksCursedBlade, "Lame Maudite du Démoniste" },2
-    { WeaponType.ClericsMace, "Masse du Clerc" },12
-    { WeaponType.NinjasShuriken, "Shuriken du Ninja" },3
-    { WeaponType.KnightsLance, "Lance du Chevalier" },13
-    { WeaponType.DruidsElementalStaff, "Bâton Élémental du Druide" }14
+    { WeaponType.SorcerersWand, "Baguette du Sorcier" },
+    { WeaponType.BarbarianBattleAxe, "Hache de Guerre Barbare" },
+    { WeaponType.ThiefsThrowingKnives, "Couteaux de Lancer du Voleur" },
+    { WeaponType.WarlocksCursedBlade, "Lame Maudite du Démoniste" },
+    { WeaponType.ClericsMace, "Masse du Clerc" },
+    { WeaponType.NinjasShuriken, "Shuriken du Ninja" },
+    { WeaponType.KnightsLance, "Lance du Chevalier" },
+    { WeaponType.DruidsElementalStaff, "Bâton Élémental du Druide" }
         // ... et ainsi de suite pour les autres armes
     };
 
