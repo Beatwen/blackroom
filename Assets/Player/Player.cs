@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class Player : Entity
 {
-    public MainGrid grid;
+     MainGrid grid;
     
     public float x;
     public float y;
@@ -21,6 +21,10 @@ public class Player : Entity
     {
         Mana = mana;
         PlayerInventory = inventory;
+    }
+
+    public Player(string name, int life, int strength, int level, int v1, int v2) : base(name, life, strength, level, v1, v2)
+    {
     }
 
     // Ramasser un objet
@@ -71,7 +75,7 @@ public class Player : Entity
         return transform;
     }
 
-    public void Start()
+    void Start()
     {
         
         Vector3 startPosition = grid.SpawnPlayer();
@@ -86,9 +90,7 @@ public class Player : Entity
     {
         return !grid.CheckNeighbourCell(x, y);
     }
-
-
-    public void Update()
+    public virtual void Move()
     {
         int newX = (int)x;
         int newY = (int)y;
@@ -117,6 +119,11 @@ public class Player : Entity
             y = newY;
         }
 
+    }
+
+     void Update()
+    {
+        Move();
     }
 
 
