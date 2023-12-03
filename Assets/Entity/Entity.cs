@@ -3,45 +3,49 @@ using UnityEngine;
 
 public class Entity : MonoBehaviour
 {
-    private int strength;
-    private int v1;
-    private int v2;
 
     // Attributs
-    public string Name { get; set; }
-    public int Life { get; set; }
-    public int Mana { get; set; }
-    public int Experience { get; set; }
-    public int Level { get; set; }
-    public int PositionX { get; set; }
-    public int PositionY { get; set; }
-    // public int Strength { get; set; }
+    public Animator animator;
+    public SpriteRenderer spriteRenderer;
+    public BoxCollider2D boxCollider;
+    public float horizontalInput;
+    public float verticalInput;
+    public int AttackDammage;
+    public string Name;
+    public int Life;
+    public int Mana;
+    public int Experience;
+    public int Level;
+    public int PositionX;
+    public int PositionY;
 
-    // Constructeur
-    public Entity(string name, int life, int mana, int experience, int level, int positionX, int positionY)
+    protected virtual void CharFlipLogic(float direction)
     {
-        Name = name;
-        Life = life;
-        Mana = mana;
-        Experience = experience;
-        Level = level;
-        PositionX = positionX;
-        PositionY = positionY;
-    }
-
-    public Entity(string name, int life, int strength, int level, int v1, int v2)
-    {
-        this.name = name;
-        Life = life;
-        this.strength = strength;
-        Level = level;
-        this.v1 = v1;
-        this.v2 = v2;
+        if (direction < 0)
+        {
+            spriteRenderer.flipX = true;
+            boxCollider.offset = new Vector2(-Mathf.Abs(boxCollider.offset.x), boxCollider.offset.y);
+        }
+        else if (direction > 0)
+        {
+            spriteRenderer.flipX = false;
+            boxCollider.offset = new Vector2(Mathf.Abs(boxCollider.offset.x), boxCollider.offset.y);
+        }
     }
     public void Attack()
-        {
+    {
             Console.WriteLine($"{Name} Attaque ! ");
-        }
-
-
     }
+    protected virtual void Start()
+    {
+        animator = GetComponent<Animator>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        boxCollider = GetComponent<BoxCollider2D>();
+    }
+    protected virtual void Update()
+    {
+        
+    }
+
+
+}

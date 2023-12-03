@@ -6,26 +6,13 @@ using UnityEngine;
 public class Player : Entity
 {
     [SerializedObject] public MainGrid grid;
-    
     public float x;
     public float y;
     public float z;
 
-
-    // Attributs
     public Inventory PlayerInventory { get; set; }
+    
 
-    // Constructeur
-    public Player(string name, int life, int strength, int level, int positionX, int positionY, int mana, Inventory inventory)
-        : base(name, life, strength, level, positionX=0, positionY=0)
-    {
-        Mana = mana;
-        PlayerInventory = inventory;
-    }
-
-    public Player(string name, int life, int strength, int level, int v1, int v2) : base(name, life, strength, level, v1, v2)
-    {
-    }
 
     // Ramasser un objet
     public void PickUpItem(string item)
@@ -46,7 +33,7 @@ public class Player : Entity
         List<Room> rooms = grid.rooms;
         foreach (var room in rooms)
         {
-            (float x, float y) coordonneesDeMaPremierePiece = (room.coordinate);
+            _ = (room.coordinate);
         }
     }
     public void CastSpell(Spell spell)
@@ -75,9 +62,10 @@ public class Player : Entity
         return transform;
     }
 
-    void Start()
+    protected override void Start()
     {
-        
+        base.Start();
+
         Vector3 startPosition = grid.SpawnPlayer();
         x = startPosition.x;
         y = startPosition.y;
@@ -121,8 +109,9 @@ public class Player : Entity
 
     }
 
-     void Update()
+    protected override void Update()
     {
+        base.Update();
         Move();
     }
 
