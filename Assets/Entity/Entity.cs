@@ -38,15 +38,6 @@ public class Entity : MonoBehaviour
         this.v1 = v1;
         this.v2 = v2;
     }
-
-    // Deplacement 
- //   public void Move(int newX, int newY)
- //   {
-	//		PositionX = newX;
-	//		PositionY = newY;
-	//}
-
-    // Attaque
     public void Attack()
         {
             Console.WriteLine($"{Name} Attaque ! ");

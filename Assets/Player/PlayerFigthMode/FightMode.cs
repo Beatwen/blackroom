@@ -4,7 +4,7 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-public class FigthMode : Entity
+public class FightMode : Entity
 {
     [SerializeField] private float movementSpeed = 3.0f;
     private Animator animator;
@@ -15,7 +15,7 @@ public class FigthMode : Entity
     private float y;
     private float z;
 
-    public FigthMode(string name, int life, int mana, int experience, int level, int positionX, int positionY) : base(name, life, mana, experience, level, positionX, positionY)
+    public FightMode(string name, int life, int mana, int experience, int level, int positionX, int positionY) : base(name, life, mana, experience, level, positionX, positionY)
     {
     }
 
