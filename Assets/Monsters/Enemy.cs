@@ -106,7 +106,7 @@ public class Monsters : Entity
     {
         animator.SetTrigger("Die");
 
-        GetComponent<Collider2D>().enabled = false;
+        rb.simulated = false;
 
         enabled = false;
     }

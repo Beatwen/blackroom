@@ -8,6 +8,7 @@ public class Entity : MonoBehaviour
     public Animator animator;
     public SpriteRenderer spriteRenderer;
     public BoxCollider2D boxCollider;
+    public Rigidbody2D rb;
     public float horizontalInput;
     public float verticalInput;
     public int AttackDammage;
@@ -21,12 +22,12 @@ public class Entity : MonoBehaviour
 
     protected virtual void CharFlipLogic(float direction)
     {
-        if (direction < 0)
+        if (direction <= 0)
         {
             spriteRenderer.flipX = true;
             boxCollider.offset = new Vector2(-Mathf.Abs(boxCollider.offset.x), boxCollider.offset.y);
         }
-        else if (direction > 0)
+        else if (direction >= 0)
         {
             spriteRenderer.flipX = false;
             boxCollider.offset = new Vector2(Mathf.Abs(boxCollider.offset.x), boxCollider.offset.y);
@@ -41,6 +42,7 @@ public class Entity : MonoBehaviour
         animator = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         boxCollider = GetComponent<BoxCollider2D>();
+        rb = GetComponent<Rigidbody2D>();
     }
     protected virtual void Update()
     {
