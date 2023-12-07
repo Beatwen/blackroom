@@ -40,16 +40,6 @@ public class PlayerFightMode : Entity
         transform.Translate(horizontalMovement + verticalMovement);
         animator.SetFloat("Speed", horizontalInput);
         animator.SetFloat("SpeedY", verticalInput);
-        //if (horizontalInput < 0)
-        //{
-        //    // Face left
-        //    spriteRenderer.flipX = true;
-        //}
-        //else if (horizontalInput > 0)
-        //{
-        //    // Face right
-        //    spriteRenderer.flipX = false;
-        //}
 
 
         if (Input.GetMouseButtonDown(1))
