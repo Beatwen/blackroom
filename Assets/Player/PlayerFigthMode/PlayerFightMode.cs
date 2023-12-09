@@ -11,6 +11,7 @@ public class PlayerFightMode : Entity
     private float y;
     private float z;
 
+
     protected override void Start()
     {
         base.Start();

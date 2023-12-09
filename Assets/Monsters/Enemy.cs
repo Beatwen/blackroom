@@ -8,7 +8,6 @@ public class Monsters : Entity
     public LayerMask WhatIsPlayer;
 
     public bool isDead = false;
-    public int Strength { get; set; }
     public float moveSpeed = 1f;
     public float rotationSpeed = 1f;
     float enemySpeedX;
@@ -35,6 +34,7 @@ public class Monsters : Entity
         // Translate towards the player
         Vector3 direction = (playerPos.position - transform.position).normalized;
         transform.Translate(direction * moveSpeed * Time.deltaTime, Space.World);
+        CharFlipLogic(direction.x);
 
         // Look at the player
         //Quaternion toRotation = Quaternion.LookRotation(Vector3.forward, direction);
@@ -46,11 +46,13 @@ public class Monsters : Entity
         if (!alreadyAttacked)
         {
             animator.SetTrigger("Attack");
-            Debug.Log("ici");
             alreadyAttacked = true;
             Invoke(nameof(ResetAttack), timeBetweenAttacks);
-
-
+            PlayerFightMode player = playerPos.GetComponent<PlayerFightMode>();
+            if (player != null)
+            {
+                player.TakeDamage(AttackDamage);
+            }
         }
     }
     private void ResetAttack()
@@ -63,19 +65,18 @@ public class Monsters : Entity
         playerPos = GameObject.Find("Player").transform;
     }
 
-    public Monsters(string name, int life, int level, int positionX, int positionY, int strength)
+    public Monsters(string name, int life, int level, int positionX, int positionY)
     {
         Name = name;
         Life = life;
         Level = level;
         PositionX = positionX;
         PositionY = positionY;
-        Strength = strength;
     }
 
     public void GiveExperience(int experiencePoints)
     {
-        Console.WriteLine($"{Name} gives {experiencePoints} experience points.");
+        Debug.Log($"{Name} gives {experiencePoints} experience points.");
     }
     
     public void GiveItem(string item)
@@ -87,29 +88,13 @@ public class Monsters : Entity
         if (attack.CompareTag("Enemy"))
         {
             PlayerFightMode player = attack.GetComponentInParent<PlayerFightMode>();
-            TakeDamage(player.AttackDammage);
-        }
-    }
-    public void TakeDamage(int damage)
-    {
-        Life -= damage;
 
-        animator.SetTrigger("Hurt");
-
-        if (Life <= 0)
-        {
-            Die();
+            TakeDamage(player.AttackDamage);
+            Debug.Log("Deal damage to ennemy !");
         }
     }
 
-    void Die()
-    {
-        animator.SetTrigger("Die");
 
-        rb.simulated = false;
-
-        enabled = false;
-    }
     protected override void Start()
     {
         base.Start();
@@ -118,12 +103,6 @@ public class Monsters : Entity
     protected override void Update()
     {
         base.Update();
-
-        Vector3 movement = new Vector3(horizontalInput, verticalInput, 0) * Time.deltaTime * moveSpeed;
-        transform.Translate(movement);
-        float direction = Mathf.Sign(transform.position.x - previousPosition.x);
-        previousPosition = transform.position;
-        CharFlipLogic(direction);
 
         // This is how I check if the player if around
         Collider2D hit = Physics2D.OverlapCircle(transform.position, sightRange, WhatIsPlayer);
