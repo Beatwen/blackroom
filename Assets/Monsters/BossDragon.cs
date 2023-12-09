@@ -7,7 +7,7 @@ public class DragonBoss : Monsters
     public string SpecialAbility { get; set; }
 
     // Constructeur du DragonBoss
-    public DragonBoss() : base("DRACO", 1000, 1, 0, 0, 0)
+    public DragonBoss() : base("DRACO", 1000, 1, 0, 0)
     {
         // Initialisez les propriétés spécifiques au boss ici
         FireDamage = 50;

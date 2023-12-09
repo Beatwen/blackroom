@@ -11,7 +11,7 @@ public class Entity : MonoBehaviour
     public Rigidbody2D rb;
     public float horizontalInput;
     public float verticalInput;
-    public int AttackDammage;
+    public int AttackDamage;
     public string Name;
     public int Life;
     public int Mana;
@@ -22,21 +22,37 @@ public class Entity : MonoBehaviour
 
     protected virtual void CharFlipLogic(float direction)
     {
-        if (direction <= 0)
+        if (direction < 0)
         {
             spriteRenderer.flipX = true;
             boxCollider.offset = new Vector2(-Mathf.Abs(boxCollider.offset.x), boxCollider.offset.y);
         }
-        else if (direction >= 0)
+        else if (direction > 0)
         {
             spriteRenderer.flipX = false;
             boxCollider.offset = new Vector2(Mathf.Abs(boxCollider.offset.x), boxCollider.offset.y);
         }
     }
-    public void Attack()
+    public virtual void TakeDamage(int damage)
     {
-            Console.WriteLine($"{Name} Attaque ! ");
+        Life -= damage;
+        Debug.Log("Damage !");
+        animator.SetTrigger("Hurt");
+
+        if (Life <= 0)
+        {
+            Die();
+        }
     }
+    protected virtual void Die()
+    {
+        animator.SetTrigger("Die");
+
+        rb.simulated = false;
+
+        enabled = false;
+    }
+
     protected virtual void Start()
     {
         animator = GetComponent<Animator>();
