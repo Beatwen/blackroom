@@ -13,7 +13,6 @@ public class Monsters : Entity
     float enemySpeedX;
     float direction;
 
-
     public float timeBetweenAttacks;
     bool alreadyAttacked;
     private Vector3 previousPosition;
@@ -83,7 +82,8 @@ public class Monsters : Entity
     {
         Console.WriteLine($"{Name} gives {item}.");
     }
-    private void OnTriggerEnter2D(Collider2D attack)
+
+    private void OnTriggerExit2D(Collider2D attack)
     {
         if (attack.CompareTag("Enemy"))
         {
