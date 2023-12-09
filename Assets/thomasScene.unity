@@ -908,7 +908,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 81043374}
-  m_Father: {fileID: 2102019314}
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &1842885486
 Animator:
@@ -1068,8 +1068,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 1842885485}
+  m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &2109988902
@@ -1136,6 +1135,7 @@ SceneRoots:
   - {fileID: 862015851}
   - {fileID: 1484032616}
   - {fileID: 2102019314}
+  - {fileID: 1842885485}
   - {fileID: 584013322}
   - {fileID: 1404901758}
   - {fileID: 2109988902}
