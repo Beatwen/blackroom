@@ -606,7 +606,7 @@ BoxCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1767808027}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IncludeLayers:
@@ -738,7 +738,7 @@ MonoBehaviour:
   AttackDamage: 15
   Name: 
   Life: 200
-  Mana: 0
+  Mana: 40
   Experience: 0
   Level: 0
   PositionX: 0
@@ -987,7 +987,6 @@ GameObject:
   - component: {fileID: 2131289993}
   - component: {fileID: 2131289994}
   - component: {fileID: 2131289997}
-  - component: {fileID: 2131289996}
   m_Layer: 0
   m_Name: Lezard
   m_TagString: Enemy
@@ -1167,18 +1166,6 @@ MonoBehaviour:
   attackRange: 1
   playerIsVisible: 0
   playerIsClose: 1
---- !u!114 &2131289996
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2131289990}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b5762238638821f4992e18d9d73d9b05, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!50 &2131289997
 Rigidbody2D:
   serializedVersion: 4
