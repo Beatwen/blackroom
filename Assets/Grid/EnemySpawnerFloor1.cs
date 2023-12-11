@@ -50,7 +50,7 @@ public class EnemySpawnerFloor1 : MonoBehaviour
             if (lizard.Life <= 0)
             {
                 monsters.Remove(monster);
-                monstersToRemove.Add(lizard);
+                monstersDead.Add(lizard);
             }
         }
         if (monsters.Count == monstersDead.Count)
