@@ -3,6 +3,7 @@ using UnityEngine;
 public class Room : MonoBehaviour
 {
     public (float x, float y) coordinate { get; set; }
+    public string RoomCat { get; set; }
     private bool isVisited;
     private bool isAdjacentToVisited;
     MainGrid mainGrid = GameManager.instance.mainGrid;
@@ -23,7 +24,7 @@ public class Room : MonoBehaviour
             isVisited = true;
             
             HighLightedRoom();
-            
+          
         }
     }
 

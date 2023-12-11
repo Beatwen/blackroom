@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.Tracing;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -21,6 +22,7 @@ public class Monsters : Entity
     public float sightRange = 2;
     public float attackRange= 1;
     public bool playerIsVisible, playerIsClose;
+    public int counter = 0;
 
     void Patrol()
     {
@@ -44,14 +46,20 @@ public class Monsters : Entity
         animator.SetFloat("Velocity", 0f);
         if (!alreadyAttacked)
         {
+            Invoke(nameof(AttackPlayerLogic), 0.2f);
             animator.SetTrigger("Attack");
             alreadyAttacked = true;
             Invoke(nameof(ResetAttack), timeBetweenAttacks);
-            PlayerFightMode player = playerPos.GetComponent<PlayerFightMode>();
-            if (player != null)
-            {
-                player.TakeDamage(AttackDamage);
-            }
+
+        }
+    }
+    void AttackPlayerLogic()
+    {
+        
+        PlayerFightMode player = playerPos.GetComponent<PlayerFightMode>();
+        if (player != null)
+        {
+            player.TakeDamage(AttackDamage);
         }
     }
     private void ResetAttack()
@@ -82,15 +90,15 @@ public class Monsters : Entity
     {
         Console.WriteLine($"{Name} gives {item}.");
     }
-
-    private void OnTriggerExit2D(Collider2D attack)
+    // On Trigger To Hit the Enemy;
+    private void OnTriggerEnter2D(Collider2D collide)
     {
-        if (attack.CompareTag("Enemy"))
+        
+        if (collide.CompareTag("Enemy"))
         {
-            PlayerFightMode player = attack.GetComponentInParent<PlayerFightMode>();
-
+            Debug.Log(++counter);
+            PlayerFightMode player = collide.GetComponentInParent<PlayerFightMode>();
             TakeDamage(player.AttackDamage);
-            Debug.Log("Deal damage to ennemy !");
         }
     }
 
