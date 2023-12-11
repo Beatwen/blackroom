@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 9062811962561937850}
   - component: {fileID: 4247516603966193133}
   - component: {fileID: 429278095792290994}
+  - component: {fileID: -1455549025333708188}
   m_Layer: 0
   m_Name: Lizard
   m_TagString: Enemy
@@ -220,6 +221,44 @@ MonoBehaviour:
   attackRange: 1
   playerIsVisible: 0
   playerIsClose: 1
+--- !u!114 &-1455549025333708188
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1543751038719379519}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 786acd11ced629140a8c5523c2536162, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animator: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  boxCollider: {fileID: 0}
+  rb: {fileID: 0}
+  horizontalInput: 0
+  verticalInput: 0
+  AttackDamage: 0
+  Name: 
+  Life: 0
+  Mana: 0
+  Experience: 0
+  Level: 0
+  PositionX: 0
+  PositionY: 0
+  WhatIsPlayer:
+    serializedVersion: 2
+    m_Bits: 0
+  isDead: 0
+  moveSpeed: 0
+  rotationSpeed: 0
+  timeBetweenAttacks: 0
+  walkPoint: {x: 0, y: 0, z: 0}
+  sightRange: 0
+  attackRange: 0
+  playerIsVisible: 0
+  playerIsClose: 0
 --- !u!1 &8284827461664608265
 GameObject:
   m_ObjectHideFlags: 0
