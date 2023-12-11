@@ -109,7 +109,6 @@
     <Compile Include="Assets\Player\PlayerFigthMode\WeaponFightMode.cs" />
     <Compile Include="Assets\Grid\ChestRoom.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark03.cs" />
-    <Compile Include="Assets\Monsters\BossDragon.cs" />
     <Compile Include="Assets\Player\Player.cs" />
     <Compile Include="Assets\Entity\Entity.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextInfoDebugTool.cs" />
