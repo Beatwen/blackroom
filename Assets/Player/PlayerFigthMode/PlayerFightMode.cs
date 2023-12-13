@@ -17,7 +17,7 @@ public class PlayerFightMode : Entity
         base.Start();
         spriteRenderer = GetComponent<SpriteRenderer>();
         animator = GetComponent<Animator>();
-        Vector3 startPosition = Vector3.zero;
+        Vector3 startPosition = new Vector3(-6.75f, 2.25f, 0f) ;
         x = startPosition.x;
         y = startPosition.y;
         z = startPosition.z;

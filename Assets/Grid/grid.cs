@@ -9,7 +9,7 @@ public class MainGrid : MonoBehaviour
 
     [SerializeField] private int height = 8;
     [SerializeField] private int width = 9;
-    [SerializeField] private int floorLevel = 1;
+    [SerializeField] public int floorLevel = 1;
     [SerializeField] private Transform cam;
     [SerializeField] private Cell cellPrefab;
     [SerializeField] private Room roomPrefab;
@@ -55,14 +55,15 @@ public class MainGrid : MonoBehaviour
     }
     public void GenerateRoomFunction()
     {
-        foreach(Room room in rooms)
-        {
-            if (room != startRoom && room != bossRoom)
             {
-
+                for (int i = 0; i < 2; i++)
+                {
+                    int rndRoomIndex = Random.Range(0, rooms.Count);
+                    rooms[rndRoomIndex].RoomCat = "FightRoom";
+                    Debug.Log("pièce fight  " + rooms[rndRoomIndex].coordinate);
+                }
             }
-        }
-    }
+     }
 
     public (int x, int y) InstantiateRoom(int x, int y)
     {
@@ -162,8 +163,7 @@ public class MainGrid : MonoBehaviour
         return Mathf.Sqrt(Mathf.Pow(roomCoordX-playerCoordX, 2) + Mathf.Pow(roomCoordY-playerCoordY, 2));
     }
     public Room GetRoom((float x, float y ) coordinates)
-    {
-        
+    {  
         return rooms.Find(room => room.coordinate == coordinates);
     }
     void Start()
@@ -175,5 +175,8 @@ public class MainGrid : MonoBehaviour
         Vector3 playerStartPosition = SpawnPlayer();
         player.SetBossRoomReference(this);
 
+    }
+    private void Update()
+    {
     }
 }

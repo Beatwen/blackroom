@@ -36,7 +36,6 @@ public class Entity : MonoBehaviour
     public virtual void TakeDamage(int damage)
     {
         Life -= damage;
-        Debug.Log("Damage !");
         animator.SetTrigger("Hurt");
 
         if (Life <= 0)

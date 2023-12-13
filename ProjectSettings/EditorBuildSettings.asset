@@ -12,6 +12,11 @@ EditorBuildSettings:
     path: Assets/Scenes/MapGame.unity
     guid: af21e8f95c80329428d776fa7afbdb91
   - enabled: 1
+<<<<<<< HEAD
     path: Assets/Scenes/LevelOne.unity
     guid: db3fe97d9bf900e4d94a23b7614c9abd
+=======
+    path: Assets/Scenes/Floor1.unity
+    guid: 2f038ee0773140144b0abc3db448800a
+>>>>>>> 9fdc55f7bd1d33e5a572488045620c9720bb5c55
   m_configObjects: {}

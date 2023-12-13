@@ -1,10 +1,17 @@
 using System;
 using System.Collections.Generic;
+<<<<<<< HEAD
 using System.Diagnostics;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
+=======
+using System.Linq;
+using UnityEditor;
+using UnityEngine;
+using UnityEngine.SceneManagement;
+>>>>>>> 9fdc55f7bd1d33e5a572488045620c9720bb5c55
 
 public class Player : Entity
 {
@@ -32,14 +39,6 @@ public class Player : Entity
     }
 
     // Utiliser un sort
-    public void nepasmarcherla()
-    {
-        List<Room> rooms = grid.rooms;
-        foreach (var room in rooms)
-        {
-            _ = (room.coordinate);
-        }
-    }
     public void CastSpell(Spell spell)
     {
         Console.WriteLine($"{Name} is casting {spell.Name}.");
@@ -117,9 +116,16 @@ public class Player : Entity
 
         if (CheckPlayerNeighbourCell(newX, newY))
         {
+            Debug.Log($"Checking room at ({newX}, {newY}): {grid.rooms.FirstOrDefault(room => room.coordinate == (newX, newY))?.RoomCat}");
+
             transform.position = new Vector3(newX, newY, z);
             x = newX;
             y = newY;
+
+            if (grid.rooms.Any(room => room.coordinate == (newX, newY) && room.RoomCat == "FightRoom"))
+            {
+                SceneManager.LoadScene($"Floor{grid.floorLevel}");
+            }
         }
 
 
