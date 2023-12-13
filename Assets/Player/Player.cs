@@ -1,17 +1,21 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.UIElements;
 
 public class Player : Entity
 {
-    [SerializedObject] public MainGrid grid;
+    public MainGrid grid;
     public float x;
     public float y;
     public float z;
 
     public Inventory PlayerInventory { get; set; }
-    
+    public Room bossRoom;
+
 
 
     // Ramasser un objet
@@ -78,6 +82,17 @@ public class Player : Entity
     {
         return !grid.CheckNeighbourCell(x, y);
     }
+
+    public void LoadBossRoom()
+    {
+        Room bossRoom = grid.BossRoom;
+        SceneManager.LoadScene("LevelOne");
+    }
+
+    public void SetBossRoomReference(MainGrid mainGrid)
+    {
+        grid = mainGrid;
+    }
     public virtual void Move()
     {
         int newX = (int)x;
@@ -107,7 +122,13 @@ public class Player : Entity
             y = newY;
         }
 
+
+        if ((x, y) == bossRoom.coordinate)
+        {
+            LoadBossRoom();
+        }
     }
+
 
     protected override void Update()
     {

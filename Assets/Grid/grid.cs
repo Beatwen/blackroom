@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class MainGrid : MonoBehaviour
 {
+
+    public Player player;
+
     [SerializeField] private int height = 8;
     [SerializeField] private int width = 9;
     [SerializeField] private int floorLevel = 1;
@@ -12,7 +15,8 @@ public class MainGrid : MonoBehaviour
     [SerializeField] private Room roomPrefab;
     [SerializeField] public List<Room> rooms = new();
     public Room startRoom;
-    public Room bossRoom;
+    private Room bossRoom;
+    public Room BossRoom { get { return bossRoom; } }
 
     private readonly List<(int x, int y)> coordinatesOfPotentialRooms = new();
 
@@ -167,5 +171,9 @@ public class MainGrid : MonoBehaviour
         GenerateGrid();
         GenerateRoom();
         GenerateRoomFunction();
+
+        Vector3 playerStartPosition = SpawnPlayer();
+        player.SetBossRoomReference(this);
+
     }
 }
