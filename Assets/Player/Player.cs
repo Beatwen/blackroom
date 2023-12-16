@@ -59,7 +59,7 @@ public class Player : Entity
     protected override void Start()
     {
         base.Start();
-
+        grid.LoadGridState();
         Vector3 startPosition = grid.SpawnPlayer();
         x = startPosition.x;
         y = startPosition.y;
@@ -104,7 +104,10 @@ public class Player : Entity
 
             if (grid.rooms.Any(room => room.coordinate == (newX, newY) && room.RoomCat == "FightRoom"))
             {
+                Debug.Log("Fightroom !!!!");
                 SceneManager.LoadScene($"Floor{grid.floorLevel}");
+                grid.SaveGridState();
+                
             }
             else if (grid.rooms.Any(room => room.coordinate == (newX, newY) &&  room.RoomCat == "BossRoom"))
             {

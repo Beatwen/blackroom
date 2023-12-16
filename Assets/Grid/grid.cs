@@ -1,6 +1,9 @@
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using UnityEngine;
+
+
 
 public class MainGrid : MonoBehaviour
 {
@@ -11,6 +14,8 @@ public class MainGrid : MonoBehaviour
     [SerializeField] private Cell cellPrefab;
     [SerializeField] private Room roomPrefab;
     [SerializeField] public List<Room> rooms = new();
+    public Player player { get; set; }
+
     public Room startRoom;
     public Room bossRoom;
 
@@ -51,15 +56,15 @@ public class MainGrid : MonoBehaviour
     }
     public void GenerateRoomFunction()
     {
-            //{
-            //    for (int i = 0; i < 2; i++)
-            //    {
-            //        int rndRoomIndex = Random.Range(0, rooms.Count);
-            //        rooms[rndRoomIndex].RoomCat = "FightRoom";
-            //        Debug.Log("pièce fight  " + rooms[rndRoomIndex].coordinate);
-            //    }
-            //}
-     }
+        
+            for (int i = 0; i < 2; i++)
+            {
+                int rndRoomIndex = Random.Range(0, rooms.Count);
+                rooms[rndRoomIndex].RoomCat = "FightRoom";
+                Debug.Log("pièce fight  " + rooms[rndRoomIndex].coordinate);
+            }
+        
+    }
 
     public (int x, int y) InstantiateRoom(int x, int y)
     {
@@ -164,50 +169,75 @@ public class MainGrid : MonoBehaviour
     {  
         return rooms.Find(room => room.coordinate == coordinates);
     }
-    //public void SaveGridState()
-    //{
-    //    PlayerPrefs.SetInt("GridWidth", width);
-    //    PlayerPrefs.SetInt("GridHeight", height);
+    public void SaveGridState()
+    {
+        Debug.Log("Save");
+        GridState state = new()
+        {
+            playerPosition = (player.x, player.y),
+            rooms = rooms.Select(room => new RoomState
+            {
+                coordinates = room.coordinate,
+                roomType = room.RoomCat
+            }).ToList()
+        };
 
-    //    foreach (Room room in rooms) 
-    //    { 
-    //        PlayerPrefs.SetFloat($"RoomX{room.coordinate.x}", room.coordinate.x);
-    //        PlayerPrefs.SetFloat($"RoomY{room.coordinate.y}", room.coordinate.y);
-    //    }
-    //    PlayerPrefs.Save();
-    //}
-    //public void LoadGridState()
-    //{
-    //    Debug.Log("LoadGridState");
-    //    width = PlayerPrefs.GetInt("GridWidth", width);
-    //    height = PlayerPrefs.GetInt("GridHeight", height);
+        string json = JsonUtility.ToJson(state);
+        File.WriteAllText("SaveStateTest", json);
+    }
 
-    //    // Load room coordinates
-    //    rooms.Clear();
-    //    int i = 0;
-    //    while (PlayerPrefs.HasKey($"RoomX{i}"))
-    //    {
-    //        float x = PlayerPrefs.GetFloat($"RoomX{i}");
-    //        float y = PlayerPrefs.GetFloat($"RoomY{i}");
-    //        InstantiateRoom((int)x, (int)y);
-    //        i++;
-    //    }
-    //}
+    public void LoadGridState()
+    {
+        Debug.Log("Loading the grid");
+        if (File.Exists("SaveStateTest"))
+        {
+            string json = File.ReadAllText("SaveStateTest");
+            GridState state = JsonUtility.FromJson<GridState>(json);
+
+            // Restaurer la position du joueur
+            player.x = state.playerPosition.x;
+            player.y = state.playerPosition.y;
+            player.transform.position = new Vector3(player.x, player.y, player.z);
+
+            // Restaurer les salles
+            rooms.Clear();
+            foreach (RoomState roomState in state.rooms)
+            {
+                Room room = Instantiate(roomPrefab, new Vector3(roomState.coordinates.x, roomState.coordinates.y), Quaternion.identity);
+                room.coordinate = roomState.coordinates;
+                room.RoomCat = roomState.roomType;
+                rooms.Add(room);
+            }
+        }
+    }
 
 
     void Start()
     {
         GenerateGrid();
-        //LoadGridState(); 
+        //LoadGridState();
         GenerateRoom();
         GenerateRoomFunction();
     }
 
     private void OnDestroy()
     {
-        //SaveGridState(); 
+        //SaveGridState();
     }
     private void Update()
     {
     }
 }
+    [System.Serializable]
+    public class GridState : MonoBehaviour
+    {
+        public List<RoomState> rooms;
+        public (float x, float y) playerPosition;
+    }
+
+    [System.Serializable]
+    public class RoomState : MonoBehaviour
+    {
+        public (float x, float y) coordinates;
+        public string roomType;
+    }

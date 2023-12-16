@@ -1,4 +1,3 @@
-save monster enemy:
 
 using System;
 using System.Collections.Generic;
