@@ -60,9 +60,19 @@ public class EnemySpawnerFloor1 : MonoBehaviour
                 monstersDead.Add(lizard);
             }
         }
+        if (monstersDead.Count == count)
+        {
+            Invoke("LoadMapGameScene", 3f);
+        }
+
+
         //if (monsters.Count == count)
         //{
         //    SceneManager.LoadScene("MapGame");
         //}
+    }
+    void LoadMapGameScene()
+    {
+        SceneManager.LoadScene("MapGame");
     }
 }
