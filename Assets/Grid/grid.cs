@@ -51,14 +51,14 @@ public class MainGrid : MonoBehaviour
     }
     public void GenerateRoomFunction()
     {
-            {
-                for (int i = 0; i < 2; i++)
-                {
-                    int rndRoomIndex = Random.Range(0, rooms.Count);
-                    rooms[rndRoomIndex].RoomCat = "FightRoom";
-                    Debug.Log("pièce fight  " + rooms[rndRoomIndex].coordinate);
-                }
-            }
+            //{
+            //    for (int i = 0; i < 2; i++)
+            //    {
+            //        int rndRoomIndex = Random.Range(0, rooms.Count);
+            //        rooms[rndRoomIndex].RoomCat = "FightRoom";
+            //        Debug.Log("pièce fight  " + rooms[rndRoomIndex].coordinate);
+            //    }
+            //}
      }
 
     public (int x, int y) InstantiateRoom(int x, int y)
@@ -148,6 +148,8 @@ public class MainGrid : MonoBehaviour
         Dictionary<Room, float> sortedRoomDistance = roomDistance.OrderBy(r => r.Value).ToDictionary(x => x.Key, x => x.Value);
         var LastPair = sortedRoomDistance.Last();
         BossRoom = LastPair.Key;
+        bossRoom = BossRoom;
+        bossRoom.RoomCat = "BossRoom";
         return BossRoom.transform.position; 
     }
     private float DistanceBtwRooms(Room room, Room playerStartRoom)
@@ -162,11 +164,48 @@ public class MainGrid : MonoBehaviour
     {  
         return rooms.Find(room => room.coordinate == coordinates);
     }
+    //public void SaveGridState()
+    //{
+    //    PlayerPrefs.SetInt("GridWidth", width);
+    //    PlayerPrefs.SetInt("GridHeight", height);
+
+    //    foreach (Room room in rooms) 
+    //    { 
+    //        PlayerPrefs.SetFloat($"RoomX{room.coordinate.x}", room.coordinate.x);
+    //        PlayerPrefs.SetFloat($"RoomY{room.coordinate.y}", room.coordinate.y);
+    //    }
+    //    PlayerPrefs.Save();
+    //}
+    //public void LoadGridState()
+    //{
+    //    Debug.Log("LoadGridState");
+    //    width = PlayerPrefs.GetInt("GridWidth", width);
+    //    height = PlayerPrefs.GetInt("GridHeight", height);
+
+    //    // Load room coordinates
+    //    rooms.Clear();
+    //    int i = 0;
+    //    while (PlayerPrefs.HasKey($"RoomX{i}"))
+    //    {
+    //        float x = PlayerPrefs.GetFloat($"RoomX{i}");
+    //        float y = PlayerPrefs.GetFloat($"RoomY{i}");
+    //        InstantiateRoom((int)x, (int)y);
+    //        i++;
+    //    }
+    //}
+
+
     void Start()
     {
         GenerateGrid();
+        //LoadGridState(); 
         GenerateRoom();
         GenerateRoomFunction();
+    }
+
+    private void OnDestroy()
+    {
+        //SaveGridState(); 
     }
     private void Update()
     {
