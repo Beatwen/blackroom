@@ -372,6 +372,67 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 316502304}
   m_CullTransparentMesh: 1
+--- !u!1001 &856458884
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2826118397175181392, guid: 46ce9d29991be814ba4926350c13c978, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 3.34
+      objectReference: {fileID: 0}
+    - target: {fileID: 2826118397175181392, guid: 46ce9d29991be814ba4926350c13c978, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -1.93
+      objectReference: {fileID: 0}
+    - target: {fileID: 2826118397175181392, guid: 46ce9d29991be814ba4926350c13c978, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2826118397175181392, guid: 46ce9d29991be814ba4926350c13c978, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2826118397175181392, guid: 46ce9d29991be814ba4926350c13c978, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2826118397175181392, guid: 46ce9d29991be814ba4926350c13c978, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2826118397175181392, guid: 46ce9d29991be814ba4926350c13c978, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2826118397175181392, guid: 46ce9d29991be814ba4926350c13c978, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2826118397175181392, guid: 46ce9d29991be814ba4926350c13c978, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2826118397175181392, guid: 46ce9d29991be814ba4926350c13c978, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2938955887434646403, guid: 46ce9d29991be814ba4926350c13c978, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: afb8e3fc5c6cfe14f8de9914f5c6a70f, type: 2}
+    - target: {fileID: 6733865031902070065, guid: 46ce9d29991be814ba4926350c13c978, type: 3}
+      propertyPath: m_Name
+      value: DragonBoss
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 46ce9d29991be814ba4926350c13c978, type: 3}
 --- !u!1 &862015848
 GameObject:
   m_ObjectHideFlags: 0
@@ -496,6 +557,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Lezard: {fileID: 82395376354558902, guid: 2977d3158abcf0242932d3866d941c06, type: 3}
   maxMonsters: 6
+  monsters: []
+  monstersDead: []
 --- !u!114 &1228187887
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -914,3 +977,4 @@ SceneRoots:
   - {fileID: 1484032616}
   - {fileID: 2102019314}
   - {fileID: 1842885485}
+  - {fileID: 856458884}

@@ -372,6 +372,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 316502304}
   m_CullTransparentMesh: 1
+--- !u!95 &640617240 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 2938955887434646403, guid: 46ce9d29991be814ba4926350c13c978, type: 3}
+  m_PrefabInstance: {fileID: 2016021694}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &862015848
 GameObject:
   m_ObjectHideFlags: 0
@@ -827,7 +832,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: DragonBoss
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 8729416848890909475, guid: 46ce9d29991be814ba4926350c13c978, type: 3}
+      propertyPath: Life
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 8729416848890909475, guid: 46ce9d29991be814ba4926350c13c978, type: 3}
+      propertyPath: animator
+      value: 
+      objectReference: {fileID: 640617240}
+    m_RemovedComponents:
+    - {fileID: -1937367824737916158, guid: 46ce9d29991be814ba4926350c13c978, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
