@@ -93,15 +93,16 @@ public class Monsters : Entity
     // On Trigger To Hit the Enemy;
     private void OnTriggerEnter2D(Collider2D collide)
     {
-
-        if (collide.CompareTag("Enemy"))
+        if (collide.CompareTag("Player"))
         {
-            Debug.Log(++counter);
+            Debug.Log("Collision avec le joueur détectée.");
             PlayerFightMode player = collide.GetComponentInParent<PlayerFightMode>();
-            TakeDamage(player.AttackDamage);
+            if (player != null)
+            {
+                TakeDamage(player.AttackDamage);
+            }
         }
     }
-
 
     protected override void Start()
     {
