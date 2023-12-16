@@ -116,7 +116,7 @@ public class Player : Entity
 
             if (grid.rooms.Any(room => room.coordinate == (newX, newY) && room.RoomCat == "FightRoom"))
             {
-                Debug.Log("Fightroom !!!!");
+                //Debug.Log("Fightroom !!!!");
                 SceneManager.LoadScene($"Floor{grid.floorLevel}");
                 grid.SaveGridState();
                 

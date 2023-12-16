@@ -8,8 +8,6 @@ using UnityEngine;
 public class MainGrid : MonoBehaviour
 {
 
-    public Player player;
-
     [SerializeField] private int height = 8;
     [SerializeField] private int width = 9;
     [SerializeField] public int floorLevel = 1;
