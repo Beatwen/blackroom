@@ -20,7 +20,7 @@ public class Monsters : Entity
     public Vector3 walkPoint;
     private Transform playerPos;
     public float sightRange = 2;
-    public float attackRange= 1;
+    public float attackRange = 1;
     public bool playerIsVisible, playerIsClose;
     public int counter = 0;
 
@@ -55,7 +55,7 @@ public class Monsters : Entity
     }
     void AttackPlayerLogic()
     {
-        
+
         PlayerFightMode player = playerPos.GetComponent<PlayerFightMode>();
         if (player != null)
         {
@@ -64,7 +64,7 @@ public class Monsters : Entity
     }
     private void ResetAttack()
     {
-        
+
         alreadyAttacked = false;
     }
     private void Awake()
@@ -85,7 +85,7 @@ public class Monsters : Entity
     {
         Debug.Log($"{Name} gives {experiencePoints} experience points.");
     }
-    
+
     public void GiveItem(string item)
     {
         Console.WriteLine($"{Name} gives {item}.");
@@ -93,7 +93,7 @@ public class Monsters : Entity
     // On Trigger To Hit the Enemy;
     private void OnTriggerEnter2D(Collider2D collide)
     {
-        
+
         if (collide.CompareTag("Enemy"))
         {
             Debug.Log(++counter);
