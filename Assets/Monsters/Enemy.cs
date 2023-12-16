@@ -1,3 +1,5 @@
+save monster enemy:
+
 using System;
 using System.Collections.Generic;
 using System.Diagnostics.Tracing;
@@ -91,16 +93,18 @@ public class Monsters : Entity
         Console.WriteLine($"{Name} gives {item}.");
     }
     // On Trigger To Hit the Enemy;
+
+
+
+
     private void OnTriggerEnter2D(Collider2D collide)
     {
-        if (collide.CompareTag("Player"))
+
+        if (collide.CompareTag("Enemy"))
         {
-            Debug.Log("Collision avec le joueur détectée.");
+            Debug.Log(++counter);
             PlayerFightMode player = collide.GetComponentInParent<PlayerFightMode>();
-            if (player != null)
-            {
-                TakeDamage(player.AttackDamage);
-            }
+            TakeDamage(player.AttackDamage);
         }
     }
 
