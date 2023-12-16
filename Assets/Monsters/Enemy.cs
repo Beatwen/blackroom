@@ -1,6 +1,4 @@
 using System;
-using System.Collections.Generic;
-using System.Diagnostics.Tracing;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -10,12 +8,12 @@ public class Monsters : Entity
 
     public bool isDead = false;
     public float moveSpeed = 1f;
-    public float rotationSpeed = 1f;
+    private bool facingRight = true; // Indicateur pour savoir dans quelle direction le monstre fait face
 
     public float timeBetweenAttacks;
     bool alreadyAttacked;
     private Vector3 previousPosition;
-    public Vector3 walkPoint; // Pour la logique de patrouille future
+    public Vector3 walkPoint;
     private Transform playerPos;
     public float sightRange = 2;
     public float attackRange = 1;
@@ -66,10 +64,17 @@ public class Monsters : Entity
         Vector3 direction = (playerPos.position - transform.position).normalized;
         transform.Translate(direction * moveSpeed * Time.deltaTime, Space.World);
         CharFlipLogic(direction.x);
+    }
 
-        // Rotation en douceur vers le joueur
-        Quaternion toRotation = Quaternion.LookRotation(playerPos.position - transform.position);
-        transform.rotation = Quaternion.Slerp(transform.rotation, toRotation, rotationSpeed * Time.deltaTime);
+    void CharFlipLogic(float directionX)
+    {
+        if (directionX > 0 && !facingRight || directionX < 0 && facingRight)
+        {
+            facingRight = !facingRight;
+            Vector3 theScale = transform.localScale;
+            theScale.x *= -1;
+            transform.localScale = theScale;
+        }
     }
 
     void AttackPlayer()
