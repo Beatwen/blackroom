@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -9,9 +10,12 @@ public class EnemySpawnerFloor1 : MonoBehaviour
     public int maxMonsters;
     public List<GameObject> monsters;
     public List<Lizard> monstersDead;
+    private int count;
+    
     // Start is called before the first frame update
     public void Spawner()
     {
+        
         float x = Random.Range(0.52f, 7.57f);
         float y = Random.Range(-3f, 3f);
         SpawnLezard(new Vector3(x, y, 0));
@@ -19,10 +23,12 @@ public class EnemySpawnerFloor1 : MonoBehaviour
     }
     public void SetNbMonsters()
     {
-        int nbEnemy = Random.Range(1, maxMonsters+1);
+        int nbEnemy = Random.Range(1, maxMonsters +1);
         for (int i = 0; i < nbEnemy; i++)
         {
             Spawner();
+            count = monsters.Count;
+
         }
     }
     public void SpawnLezard(Vector3 position)
@@ -43,6 +49,7 @@ public class EnemySpawnerFloor1 : MonoBehaviour
     void CheckEnemy()
     {
         Debug.Log(monsters.Count);
+        
         foreach(GameObject monster in monsters) 
         {
             Lizard lizard = monster.GetComponent<Lizard>();
@@ -53,9 +60,9 @@ public class EnemySpawnerFloor1 : MonoBehaviour
                 monstersDead.Add(lizard);
             }
         }
-        if (monsters.Count == monstersDead.Count)
-        {
-            SceneManager.LoadScene("MapGame");
-        }
+        //if (monsters.Count == count)
+        //{
+        //    SceneManager.LoadScene("MapGame");
+        //}
     }
 }
