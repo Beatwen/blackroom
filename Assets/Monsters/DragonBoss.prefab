@@ -145,7 +145,7 @@ Animator:
   m_GameObject: {fileID: 6733865031902070065}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 35be82c976502584d9cf5dd7a34ffa4f, type: 2}
+  m_Controller: {fileID: 9100000, guid: afb8e3fc5c6cfe14f8de9914f5c6a70f, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -221,6 +221,7 @@ MonoBehaviour:
   attackRange: 1
   playerIsVisible: 0
   playerIsClose: 1
+  counter: 0
 --- !u!114 &-1937367824737916158
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -259,6 +260,7 @@ MonoBehaviour:
   attackRange: 0
   playerIsVisible: 0
   playerIsClose: 0
+  counter: 0
 --- !u!1 &7601828393075366668
 GameObject:
   m_ObjectHideFlags: 0
@@ -428,3 +430,4 @@ MonoBehaviour:
   attackRange: 0
   playerIsVisible: 0
   playerIsClose: 0
+  counter: 0
