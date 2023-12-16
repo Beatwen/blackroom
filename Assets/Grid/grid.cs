@@ -1,3 +1,4 @@
+
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -9,17 +10,37 @@ public class MainGrid : MonoBehaviour
 {
     [SerializeField] private int height = 8;
     [SerializeField] private int width = 9;
+    public Player player;
     [SerializeField] public int floorLevel = 1;
     [SerializeField] private Transform cam;
     [SerializeField] private Cell cellPrefab;
     [SerializeField] private Room roomPrefab;
     [SerializeField] public List<Room> rooms = new();
-    public Player player { get; set; }
-
+    
+    private GridData gridData;
     public Room startRoom;
     public Room bossRoom;
-
     private readonly List<(int x, int y)> coordinatesOfPotentialRooms = new();
+
+    [System.Serializable]
+    private class RoomData
+    {
+        public string name;
+        public float x;
+        public float y;
+        public string roomCat;
+        public bool isVisited;
+    }
+
+    [System.Serializable]
+    private class GridData
+    {
+        public List<RoomData> rooms;
+        public int playerRoomX;
+        public int playerRoomY;
+    }
+
+
 
     public void GenerateGrid()
     {
@@ -139,7 +160,8 @@ public class MainGrid : MonoBehaviour
         int index = Random.Range(0,rooms.Count());
         startRoom = rooms[index];
         SpawnBoss(startRoom);
-        return startRoom.transform.position;
+        Debug.Log($"Default startroom for player is {startRoom.transform.position.x} - {startRoom.transform.position.y}");
+        return startRoom.transform.position;   
     }
     public Vector3 SpawnBoss(Room playerStartRoom)
     {
@@ -155,6 +177,7 @@ public class MainGrid : MonoBehaviour
         BossRoom = LastPair.Key;
         bossRoom = BossRoom;
         bossRoom.RoomCat = "BossRoom";
+        Debug.Log($"BossRoom est {bossRoom.coordinate.x} - {bossRoom.coordinate.y}");
         return BossRoom.transform.position; 
     }
     private float DistanceBtwRooms(Room room, Room playerStartRoom)
@@ -171,43 +194,56 @@ public class MainGrid : MonoBehaviour
     }
     public void SaveGridState()
     {
-        Debug.Log("Save");
-        GridState state = new()
+        if (File.Exists("GridState.json"))
         {
-            playerPosition = (player.x, player.y),
-            rooms = rooms.Select(room => new RoomState
+            File.Delete("GridState.json");
+        }
+        gridData = new GridData
+        {
+            rooms = rooms.Select(room => new RoomData
             {
-                coordinates = room.coordinate,
-                roomType = room.RoomCat
-            }).ToList()
+                name = room.name,
+                x = room.coordinate.x,
+                y = room.coordinate.y,
+                roomCat = room.RoomCat,
+                isVisited = room.isVisited
+            }).ToList(),
+            playerRoomX = (int)player.x,
+            playerRoomY = (int)player.y,
         };
 
-        string json = JsonUtility.ToJson(state);
-        File.WriteAllText("SaveStateTest", json);
+        string json = JsonUtility.ToJson(gridData);
+        File.WriteAllText("GridState.json", json);
     }
+
 
     public void LoadGridState()
     {
-        Debug.Log("Loading the grid");
-        if (File.Exists("SaveStateTest"))
+        if (File.Exists("GridState.json"))
         {
-            string json = File.ReadAllText("SaveStateTest");
-            GridState state = JsonUtility.FromJson<GridState>(json);
 
-            // Restaurer la position du joueur
-            player.x = state.playerPosition.x;
-            player.y = state.playerPosition.y;
-            player.transform.position = new Vector3(player.x, player.y, player.z);
-
-            // Restaurer les salles
-            rooms.Clear();
-            foreach (RoomState roomState in state.rooms)
+            Debug.Log("Loading data !");
+            string json = File.ReadAllText("GridState.json");
+            gridData = JsonUtility.FromJson<GridData>(json);
+            foreach (var room in rooms)
             {
-                Room room = Instantiate(roomPrefab, new Vector3(roomState.coordinates.x, roomState.coordinates.y), Quaternion.identity);
-                room.coordinate = roomState.coordinates;
-                room.RoomCat = roomState.roomType;
+                Destroy(room.gameObject);
+            }
+            rooms.Clear();
+            foreach (var roomData in gridData.rooms)
+            {
+                var room = Instantiate(roomPrefab, new Vector3(roomData.x, roomData.y), Quaternion.identity);
+                room.name = roomData.name;
+                room.coordinate = (roomData.x, roomData.y);
+                room.RoomCat = roomData.roomCat;
+                room.isVisited = roomData.isVisited;
                 rooms.Add(room);
             }
+            Debug.Log($"Player position is restored to {gridData.playerRoomX} - {gridData.playerRoomY}");
+            Vector3 playerPosition = new Vector3(gridData.playerRoomX, gridData.playerRoomY, 0);
+            player.transform.position = playerPosition;
+            player.x = gridData.playerRoomX;
+            player.y = gridData.playerRoomY;
         }
     }
 
@@ -215,29 +251,16 @@ public class MainGrid : MonoBehaviour
     void Start()
     {
         GenerateGrid();
-        //LoadGridState();
         GenerateRoom();
         GenerateRoomFunction();
     }
 
     private void OnDestroy()
     {
-        //SaveGridState();
     }
     private void Update()
     {
     }
 }
-    [System.Serializable]
-    public class GridState : MonoBehaviour
-    {
-        public List<RoomState> rooms;
-        public (float x, float y) playerPosition;
-    }
 
-    [System.Serializable]
-    public class RoomState : MonoBehaviour
-    {
-        public (float x, float y) coordinates;
-        public string roomType;
-    }
+

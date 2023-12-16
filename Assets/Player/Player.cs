@@ -1,8 +1,10 @@
 using System;
+
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
-using UnityEditor;
 using UnityEngine;
+using UnityEditor;
 using UnityEngine.SceneManagement;
 
 public class Player : Entity
@@ -11,7 +13,6 @@ public class Player : Entity
     public float x;
     public float y;
     public float z;
-
     public Inventory PlayerInventory { get; set; }
     
 
@@ -46,7 +47,10 @@ public class Player : Entity
     }
 
 
-    // Gagner de l'expérience
+    public void SetGridReference(MainGrid gridReference)
+    {
+        grid = gridReference;
+    }
     public void GainExperience(int experiencePoints)
     {
         Console.WriteLine($"{Name} gagne {experiencePoints} points d'expérience !");
@@ -59,13 +63,19 @@ public class Player : Entity
     protected override void Start()
     {
         base.Start();
-        grid.LoadGridState();
-        Vector3 startPosition = grid.SpawnPlayer();
-        x = startPosition.x;
-        y = startPosition.y;
-        z = startPosition.z;
-        transform.position = new Vector3( x, y, z );
 
+        if (File.Exists("GridState.json"))
+        {
+            
+            grid.LoadGridState();
+        }
+        else
+        {
+            Vector3 startPosition = grid.SpawnPlayer();
+            x = startPosition.x;
+            y = startPosition.y;
+            z = startPosition.z;   
+        }
     }
 
     public bool CheckPlayerNeighbourCell(int x, int y)
@@ -96,18 +106,17 @@ public class Player : Entity
 
         if (CheckPlayerNeighbourCell(newX, newY))
         {
-            Debug.Log($"Checking room at ({newX}, {newY}): {grid.rooms.FirstOrDefault(room => room.coordinate == (newX, newY))?.RoomCat}");
-
             transform.position = new Vector3(newX, newY, z);
             x = newX;
             y = newY;
 
             if (grid.rooms.Any(room => room.coordinate == (newX, newY) && room.RoomCat == "FightRoom"))
             {
+                Room r = grid.rooms.Find(room => room.coordinate == (newX, newY) && room.RoomCat == "FightRoom");
+                r.RoomCat = "Defeated";
+                grid.SaveGridState();
                 Debug.Log("Fightroom !!!!");
                 SceneManager.LoadScene($"Floor{grid.floorLevel}");
-                grid.SaveGridState();
-                
             }
             else if (grid.rooms.Any(room => room.coordinate == (newX, newY) &&  room.RoomCat == "BossRoom"))
             {
@@ -122,6 +131,4 @@ public class Player : Entity
         base.Update();
         Move();
     }
-
-
 }

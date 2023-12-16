@@ -10,7 +10,6 @@ public class BossRoom : Room
     {
         transform.position = grid.SpawnBoss(grid.startRoom);
         Debug.Log($"La position du boss est {transform.position}");
-
     }
 
     // Update is called once per frame

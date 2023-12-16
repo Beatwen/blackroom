@@ -24,12 +24,14 @@ public class EnemySpawnerFloor1 : MonoBehaviour
     public void SetNbMonsters()
     {
         int nbEnemy = Random.Range(1, maxMonsters +1);
+        count = nbEnemy;
         for (int i = 0; i < nbEnemy; i++)
         {
             Spawner();
-            count = monsters.Count;
+            
 
         }
+        
     }
     public void SpawnLezard(Vector3 position)
     {
@@ -48,15 +50,11 @@ public class EnemySpawnerFloor1 : MonoBehaviour
     }
     void CheckEnemy()
     {
-        Debug.Log(monsters.Count);
-        
-        foreach(GameObject monster in monsters) 
+        foreach (GameObject monster in monsters) 
         {
             Lizard lizard = monster.GetComponent<Lizard>();
-            Debug.Log(lizard.Life);
-            if (lizard.Life <= 0)
+            if (lizard.Life <= 0 && !monstersDead.Contains(lizard))
             {
-                monsters.Remove(monster);
                 monstersDead.Add(lizard);
             }
         }
@@ -64,12 +62,6 @@ public class EnemySpawnerFloor1 : MonoBehaviour
         {
             Invoke("LoadMapGameScene", 3f);
         }
-
-
-        //if (monsters.Count == count)
-        //{
-        //    SceneManager.LoadScene("MapGame");
-        //}
     }
     void LoadMapGameScene()
     {

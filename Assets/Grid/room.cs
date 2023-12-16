@@ -3,28 +3,24 @@ using UnityEngine;
 public class Room : MonoBehaviour
 {
     public (float x, float y) coordinate { get; set; }
-    public string RoomCat { get; set; }
-    private bool isVisited;
+    public string RoomCat;
+    public bool isVisited;
     private bool isAdjacentToVisited;
-    MainGrid mainGrid = GameManager.instance.mainGrid;
+    private MainGrid mainGrid;
+    //MainGrid mainGrid = GameManager.instance.mainGrid;
     private SpriteRenderer spriteRenderer;
     public Objet objet { get; set; }
 
     private void Awake()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
+        mainGrid = GameManager.instance.mainGrid;
     }
     private void OnTriggerEnter2D(Collider2D otherCollider)
     {
-        Debug.Log("Trigger entered!");
         if (otherCollider.CompareTag("Player"))
         {
-            Debug.Log("Player entered the room!");
-            
             isVisited = true;
-            
-            HighLightedRoom();
-          
         }
     }
 
@@ -63,6 +59,6 @@ public class Room : MonoBehaviour
 
     void Update()
     {
-        
+        HighLightedRoom();
     }
 }
