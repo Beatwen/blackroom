@@ -68,11 +68,11 @@ public class Monsters : Entity
 
     void CharFlipLogic(float directionX)
     {
-        // Vérifier si le monstre doit faire face au joueur
-        bool shouldFaceRight = directionX > 0;
+        // Déterminer si le sprite doit être retourné
+        bool shouldFaceLeft = directionX > 0; // Inversez cette condition si nécessaire
 
-        // Inverser le sprite si la direction actuelle ne correspond pas à la direction souhaitée
-        if (shouldFaceRight != facingRight)
+        // Retourner le sprite si nécessaire
+        if (shouldFaceLeft != facingRight)
         {
             facingRight = !facingRight;
             Vector3 theScale = transform.localScale;
@@ -80,7 +80,6 @@ public class Monsters : Entity
             transform.localScale = theScale;
         }
     }
-
 
     void AttackPlayer()
     {
