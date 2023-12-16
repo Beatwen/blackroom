@@ -1,17 +1,11 @@
 using System;
 using System.Collections.Generic;
-<<<<<<< HEAD
-using System.Diagnostics;
+using System.Diagnostics; // Utilisé pour le débogage, gardez-le si nécessaire
+using System.Linq; // Utilisé pour les fonctionnalités LINQ, gardez-le si nécessaire
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.UIElements;
-=======
-using System.Linq;
-using UnityEditor;
-using UnityEngine;
-using UnityEngine.SceneManagement;
->>>>>>> 9fdc55f7bd1d33e5a572488045620c9720bb5c55
+using UnityEngine.UIElements; // Utilisé pour les éléments UI, gardez-le si nécessaire
 
 public class Player : Entity
 {
@@ -22,8 +16,6 @@ public class Player : Entity
 
     public Inventory PlayerInventory { get; set; }
     public Room bossRoom;
-
-
 
     // Ramasser un objet
     public void PickUpItem(string item)
@@ -54,12 +46,12 @@ public class Player : Entity
         }
     }
 
-
     // Gagner de l'expérience
     public void GainExperience(int experiencePoints)
     {
         Console.WriteLine($"{Name} gagne {experiencePoints} points d'expérience !");
     }
+
     public Transform GetPlayerLocation()
     {
         return transform;
@@ -73,8 +65,7 @@ public class Player : Entity
         x = startPosition.x;
         y = startPosition.y;
         z = startPosition.z;
-        transform.position = new Vector3( x, y, z );
-
+        transform.position = new Vector3(x, y, z);
     }
 
     public bool CheckPlayerNeighbourCell(int x, int y)
@@ -92,6 +83,7 @@ public class Player : Entity
     {
         grid = mainGrid;
     }
+
     public virtual void Move()
     {
         int newX = (int)x;
@@ -116,7 +108,7 @@ public class Player : Entity
 
         if (CheckPlayerNeighbourCell(newX, newY))
         {
-            Debug.Log($"Checking room at ({newX}, {newY}): {grid.rooms.FirstOrDefault(room => room.coordinate == (newX, newY))?.RoomCat}");
+            //Debug.Log($"Checking room at ({newX}, {newY}): {grid.rooms.FirstOrDefault(room => room.coordinate == (newX, newY))?.RoomCat}");
 
             transform.position = new Vector3(newX, newY, z);
             x = newX;
@@ -127,20 +119,11 @@ public class Player : Entity
                 SceneManager.LoadScene($"Floor{grid.floorLevel}");
             }
         }
-
-
-        if ((x, y) == bossRoom.coordinate)
-        {
-            LoadBossRoom();
-        }
     }
-
 
     protected override void Update()
     {
         base.Update();
         Move();
     }
-
-
 }

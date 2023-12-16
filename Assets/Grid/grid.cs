@@ -171,10 +171,6 @@ public class MainGrid : MonoBehaviour
         GenerateGrid();
         GenerateRoom();
         GenerateRoomFunction();
-
-        Vector3 playerStartPosition = SpawnPlayer();
-        player.SetBossRoomReference(this);
-
     }
     private void Update()
     {

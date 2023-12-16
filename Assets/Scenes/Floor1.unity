@@ -494,7 +494,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 91269e4f07ae1474e9c1b3bf131b44a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Lezard: {fileID: 1489467077402130654, guid: e87eb23c797a2d1419673ce67be62dc8, type: 3}
+  Lezard: {fileID: 1489467077402130654, guid: 287878727fedebb48a2fa5ee77ccfd3d, type: 3}
   maxMonsters: 6
   monsters: []
   monstersDead: []
