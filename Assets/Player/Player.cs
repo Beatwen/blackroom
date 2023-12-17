@@ -1,11 +1,10 @@
-using System;
-
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using UnityEngine;
 using UnityEditor;
 using UnityEngine.SceneManagement;
+using System;
 
 public class Player : Entity
 {
@@ -14,7 +13,7 @@ public class Player : Entity
     public float y;
     public float z;
     public Inventory PlayerInventory { get; set; }
-    
+
 
 
     // Ramasser un objet
@@ -66,15 +65,23 @@ public class Player : Entity
 
         if (File.Exists("GridState.json"))
         {
-            
+
             grid.LoadGridState();
+            if (grid.player.transform.position != null)
+            {
+                transform.position = grid.player.transform.position;
+            }
+            else
+            {
+                transform.position = new Vector3(x, y, z);
+            }
         }
         else
         {
             Vector3 startPosition = grid.SpawnPlayer();
             x = startPosition.x;
             y = startPosition.y;
-            z = startPosition.z;   
+            z = startPosition.z;
         }
     }
 

@@ -436,6 +436,10 @@ PrefabInstance:
       propertyPath: Life
       value: 92
       objectReference: {fileID: 0}
+    - target: {fileID: 5957090633871497497, guid: 77578721bacb2af45b0549d8f9b2f603, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 21003b41a3e30c046ba60a95abdc84f5, type: 2}
     - target: {fileID: 8739906754306089386, guid: 77578721bacb2af45b0549d8f9b2f603, type: 3}
       propertyPath: m_Name
       value: JinBoss
