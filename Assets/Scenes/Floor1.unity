@@ -138,7 +138,7 @@ GameObject:
   - component: {fileID: 81043378}
   m_Layer: 0
   m_Name: HitBoxPlayer
-  m_TagString: Enemy
+  m_TagString: Weapon
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -494,7 +494,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 91269e4f07ae1474e9c1b3bf131b44a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Lezard: {fileID: 1489467077402130654, guid: 287878727fedebb48a2fa5ee77ccfd3d, type: 3}
+  Lezard: {fileID: 6383144157692043121, guid: 5be5813fe046dc643905b56395ee2c56, type: 3}
   maxMonsters: 6
   monsters: []
   monstersDead: []
@@ -646,7 +646,7 @@ GameObject:
   - component: {fileID: 1842885488}
   m_Layer: 6
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -671,6 +671,7 @@ MonoBehaviour:
   verticalInput: 0
   AttackDamage: 15
   Name: 
+  hasAlreadyHit: 0
   Life: 720
   Mana: 40
   Experience: 0

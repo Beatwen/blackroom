@@ -6,33 +6,33 @@ using UnityEngine.SceneManagement;
 
 public class EnemySpawnerFloor1 : MonoBehaviour
 {
+    public int floorLevel = 1;
     public GameObject Lezard;
     public int maxMonsters;
     public List<GameObject> monsters;
-    public List<Lizard> monstersDead;
+    public List<Monsters> monstersDead;
     private int count;
-    
-    // Start is called before the first frame update
-    public void Spawner()
-    {
-        
-        float x = Random.Range(0.52f, 7.57f);
-        float y = Random.Range(-3f, 3f);
-        SpawnLezard(new Vector3(x, y, 0));
 
-    }
-    public void SetNbMonsters()
+    public virtual void SetNbMonsters()
     {
         int nbEnemy = Random.Range(1, maxMonsters +1);
         count = nbEnemy;
         for (int i = 0; i < nbEnemy; i++)
         {
-            Spawner();
-            
-
+            float x = Random.Range(0.52f, 7.57f);
+            float y = Random.Range(-3f, 3f);
+            Spawner(x,y);
         }
-        
     }
+    public virtual void Spawner(float x, float y)
+    {
+        int z = Random.Range(1, 100);
+        if (z <= 100)
+        {
+            SpawnLezard(new Vector3(x, y, 0));
+        }
+    }
+
     public void SpawnLezard(Vector3 position)
     {
         GameObject monstre = Instantiate(Lezard, position,Quaternion.identity);
@@ -48,14 +48,14 @@ public class EnemySpawnerFloor1 : MonoBehaviour
     {
         CheckEnemy();
     }
-    void CheckEnemy()
+    public virtual void CheckEnemy()
     {
         foreach (GameObject monster in monsters) 
         {
-            Lizard lizard = monster.GetComponent<Lizard>();
-            if (lizard.Life <= 0 && !monstersDead.Contains(lizard))
+            Monsters enemy  = monster.GetComponent<Monsters>();
+            if (enemy.Life <= 0 && !monstersDead.Contains(enemy))
             {
-                monstersDead.Add(lizard);
+                monstersDead.Add(enemy);
             }
         }
         if (monstersDead.Count == count)
@@ -63,8 +63,8 @@ public class EnemySpawnerFloor1 : MonoBehaviour
             Invoke("LoadMapGameScene", 3f);
         }
     }
-    void LoadMapGameScene()
+    public virtual void LoadMapGameScene()
     {
-        SceneManager.LoadScene("MapGame");
+        SceneManager.LoadScene($"MapGame{floorLevel}");
     }
 }

@@ -1,16 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using System.Threading;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class BossSpawnerFloor1 : MonoBehaviour
 {
-    public int maxMonsters;
     public Entity boss;
-    public List<GameObject> monsters;
-    public List<Lizard> monstersDead;
-    private int count;
+    public int nextLevel;
     
     void Update()
     {
@@ -20,11 +18,13 @@ public class BossSpawnerFloor1 : MonoBehaviour
     {
         if (boss.Life <= 0)
         {
+            Debug.Log("Boss defeated");
             Invoke("LoadMapGameScene", 3f);
         }
     }
-    void LoadMapGameScene()
+    public virtual void LoadMapGameScene()
     {
-        SceneManager.LoadScene("MapGame");
+        File.Delete("GridState.json");
+        SceneManager.LoadScene($"MapGame{nextLevel}");
     }
 }

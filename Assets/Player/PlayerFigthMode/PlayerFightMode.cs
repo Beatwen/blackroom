@@ -42,7 +42,10 @@ public class PlayerFightMode : Entity
         animator.SetFloat("Speed", horizontalInput);
         animator.SetFloat("SpeedY", verticalInput);
 
-
+        if (Input.GetMouseButtonDown(0))
+        {
+            animator.SetTrigger("Attack");
+        }
         if (Input.GetMouseButtonDown(1))
         {
             animator.SetTrigger("Attack2");

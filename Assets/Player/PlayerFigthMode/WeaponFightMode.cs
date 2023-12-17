@@ -20,8 +20,8 @@ public class WeaponFightMode : MonoBehaviour
         {
             Debug.Log("Player hit the enemy !");
             enableAttack = false;
-            
             Invoke(nameof(ResetAttackCooldown), attackCooldown);
+            
         }
 
     }
@@ -47,10 +47,10 @@ public class WeaponFightMode : MonoBehaviour
         {
             boxCollider.offset = new Vector2(-Mathf.Abs(boxCollider.offset.x), boxCollider.offset.y);
         }
-        if (Input.GetMouseButtonDown(0) && Time.time - timeSinceAttack > attackCooldown )
-        {
-            fightMode.animator.SetTrigger("Attack");
-            timeSinceAttack = Time.time;
-        }
+        //if (Input.GetMouseButtonDown(0) && Time.time - timeSinceAttack > attackCooldown )
+        //{
+        //    fightMode.animator.SetTrigger("Attack");
+        //    timeSinceAttack = Time.time;
+        //}
     }
 }

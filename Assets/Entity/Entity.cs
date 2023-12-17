@@ -13,6 +13,7 @@ public class Entity : MonoBehaviour
     public float verticalInput;
     public int AttackDamage;
     public string Name;
+    public bool hasAlreadyHit = false;
     public int Life;
     public int Mana;
     public int Experience;

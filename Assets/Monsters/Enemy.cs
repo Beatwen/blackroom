@@ -24,6 +24,14 @@ public class Monsters : Entity
     public float attackRange = 1;
     public bool playerIsVisible, playerIsClose;
     public int counter = 0;
+    public Monsters(string name, int life, int level, int positionX, int positionY)
+    {
+        Name = name;
+        Life = life;
+        Level = level;
+        PositionX = positionX;
+        PositionY = positionY;
+    }
 
     void Patrol()
     {
@@ -73,14 +81,6 @@ public class Monsters : Entity
         playerPos = GameObject.Find("Player").transform;
     }
 
-    public Monsters(string name, int life, int level, int positionX, int positionY)
-    {
-        Name = name;
-        Life = life;
-        Level = level;
-        PositionX = positionX;
-        PositionY = positionY;
-    }
 
     public void GiveExperience(int experiencePoints)
     {
@@ -91,19 +91,22 @@ public class Monsters : Entity
     {
         Console.WriteLine($"{Name} gives {item}.");
     }
-    // On Trigger To Hit the Enemy;
-
-
-
-
     private void OnTriggerEnter2D(Collider2D collide)
     {
 
-        if (collide.CompareTag("Enemy"))
+        if (collide.CompareTag("Weapon") && hasAlreadyHit == false)
         {
             Debug.Log(++counter);
             PlayerFightMode player = collide.GetComponentInParent<PlayerFightMode>();
             TakeDamage(player.AttackDamage);
+            hasAlreadyHit = true;
+        }
+    }
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Weapon"))
+        {
+            hasAlreadyHit = false;
         }
     }
 

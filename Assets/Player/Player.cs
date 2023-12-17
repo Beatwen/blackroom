@@ -127,7 +127,7 @@ public class Player : Entity
             }
             else if (grid.rooms.Any(room => room.coordinate == (newX, newY) &&  room.RoomCat == "BossRoom"))
             {
-                SceneManager.LoadScene("Boss1");
+                SceneManager.LoadScene($"Boss{grid.floorLevel}");
             }
         }
 

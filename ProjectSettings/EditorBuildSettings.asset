@@ -9,12 +9,24 @@ EditorBuildSettings:
     path: Assets/Scenes/StartMenu.unity
     guid: 33fd36fecdc1d09438ba71a5f0da95b1
   - enabled: 1
-    path: Assets/Scenes/MapGame.unity
-    guid: af21e8f95c80329428d776fa7afbdb91
-  - enabled: 1
     path: Assets/Scenes/Floor1.unity
     guid: 2f038ee0773140144b0abc3db448800a
   - enabled: 1
     path: Assets/Scenes/Boss1.unity
     guid: 5f3f6d5256287d64a829afe939db9fbd
+  - enabled: 1
+    path: Assets/Scenes/Floor2.unity
+    guid: 132dd48cc356b2a49a0fd7cd21b499c3
+  - enabled: 1
+    path: Assets/Scenes/MapGame2.unity
+    guid: 6e72e1e6bb701814793941773cddd5c4
+  - enabled: 1
+    path: Assets/Scenes/MapGame1.unity
+    guid: 2e5dc60cb4432264387d369e7807ca0d
+  - enabled: 1
+    path: Assets/Scenes/Boss2.unity
+    guid: e86484e3ccfb661439a1b2557900a6aa
+  - enabled: 1
+    path: Assets/Scenes/MapGame3.unity
+    guid: e8a1d9d66f2e3984a99cc12f25e45b04
   m_configObjects: {}

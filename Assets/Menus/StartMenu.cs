@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -7,10 +8,13 @@ public class StartMenu : MonoBehaviour
 {
     public void StartBtn()
     {
-        SceneManager.LoadScene("MapGame");
+        File.Delete("GridState.json");
+        SceneManager.LoadScene("MapGame1");
     }
     public void LoadBtn()
     {
+        int floorLevel = 1;
+        SceneManager.LoadScene($"MapGame{floorLevel}");
     }
     public void SettingsBtn()
     {

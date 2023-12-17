@@ -53,11 +53,10 @@ public class MainGrid : MonoBehaviour
         }
         cam.position = new Vector3((float)width / 2 - 0.5f, (float)height / 2 - 0.5f, -10);
     }
-
     public void GenerateRoom()
     {
         float random = Random.value;
-        int numberOfRooms = (int)Mathf.Floor((random * 2) + 10 + (floorLevel * 2));
+        int numberOfRooms = (int)Mathf.Floor((random * 2) + 10 + (floorLevel * 6));
         Debug.Log("We will have " + numberOfRooms + "rooms normally..");
 
         InstantiateRoom(3, 5);
