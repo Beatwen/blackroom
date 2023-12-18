@@ -10,11 +10,17 @@ public class PlayerFightMode : Entity
     private float x;
     private float y;
     private float z;
+    [SerializeField] public AudioSource attackAudioSource;
     private PlayerData playerData;
     [System.Serializable]
+
     private class PlayerData
     {
         public int LifeDisplay;
+    }
+    private void PlayAttackSound()
+    {
+        attackAudioSource.Play();
     }
     public void SavePlayerState()
     {
@@ -47,6 +53,7 @@ public class PlayerFightMode : Entity
     protected override void Start()
     {
         base.Start();
+        attackAudioSource = GetComponent<AudioSource>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         animator = GetComponent<Animator>();
         Vector3 startPosition = new Vector3(-6.75f, 2.25f, 0f) ;
@@ -78,6 +85,7 @@ public class PlayerFightMode : Entity
         if (Input.GetMouseButtonDown(0))
         {
             animator.SetTrigger("Attack");
+            PlayAttackSound();
         }
         if (Input.GetMouseButtonDown(1))
         {
