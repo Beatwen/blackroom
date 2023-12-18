@@ -3,6 +3,7 @@ using System.IO;
 using System.Linq;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerFightMode : Entity
 {
@@ -64,7 +65,15 @@ public class PlayerFightMode : Entity
         LoadPlayerState();
         // Additional initialization for the child class
     }
-
+    protected override void Die()
+    {
+        base.Die();
+        Invoke("LoadStartMenu", 3f) ;
+    }
+    void LoadStartMenu()
+    {
+        SceneManager.LoadScene("StartMenu");
+    }
     protected override void Update()
     {
         base.Update();
