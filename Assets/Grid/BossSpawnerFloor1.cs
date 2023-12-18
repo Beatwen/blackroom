@@ -18,7 +18,6 @@ public class BossSpawnerFloor1 : MonoBehaviour
     {
         if (boss.Life <= 0)
         {
-            Debug.Log("Boss defeated");
             Invoke("LoadMapGameScene", 3f);
         }
     }

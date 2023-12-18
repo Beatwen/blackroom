@@ -12,6 +12,7 @@ public class Player : Entity
     public float x;
     public float y;
     public float z;
+
     public Inventory PlayerInventory { get; set; }
 
 

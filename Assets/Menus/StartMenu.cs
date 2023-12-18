@@ -9,6 +9,7 @@ public class StartMenu : MonoBehaviour
     public void StartBtn()
     {
         File.Delete("GridState.json");
+        File.Delete("PlayerState.json");
         SceneManager.LoadScene("MapGame1");
     }
     public void LoadBtn()
