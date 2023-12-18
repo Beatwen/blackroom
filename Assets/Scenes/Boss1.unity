@@ -434,7 +434,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5460302584874255221, guid: 77578721bacb2af45b0549d8f9b2f603, type: 3}
       propertyPath: Life
-      value: 92
+      value: 500
+      objectReference: {fileID: 0}
+    - target: {fileID: 5460302584874255221, guid: 77578721bacb2af45b0549d8f9b2f603, type: 3}
+      propertyPath: AttackDamage
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 5957090633871497497, guid: 77578721bacb2af45b0549d8f9b2f603, type: 3}
       propertyPath: m_Controller
@@ -760,7 +764,7 @@ MonoBehaviour:
   AttackDamage: 15
   Name: 
   hasAlreadyHit: 0
-  Life: 720
+  Life: 500
   Mana: 40
   Experience: 0
   Level: 0

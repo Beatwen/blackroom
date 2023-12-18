@@ -529,7 +529,6 @@ MonoBehaviour:
   maxMonsters: 12
   monsters: []
   monstersDead: []
-  floorLevel: 2
   medusa: {fileID: 3227692699163760827, guid: 9c52d64420e7be945abca8ae1941f23b, type: 3}
 --- !u!1 &1484032612
 GameObject:
@@ -675,7 +674,7 @@ MonoBehaviour:
   AttackDamage: 15
   Name: 
   hasAlreadyHit: 0
-  Life: 720
+  Life: 500
   Mana: 40
   Experience: 0
   Level: 0

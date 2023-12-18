@@ -94,19 +94,19 @@ public class Player : Entity
         int newX = (int)x;
         int newY = (int)y;
 
-        if (Input.GetKeyDown(KeyCode.UpArrow))
+        if (Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.W))
         {
             newY += 1;
         }
-        else if (Input.GetKeyDown(KeyCode.DownArrow) && y > 0)
+        else if ((Input.GetKeyDown(KeyCode.DownArrow) || Input.GetKeyDown(KeyCode.S)) && y > 0)
         {
             newY -= 1;
         }
-        else if (Input.GetKeyDown(KeyCode.RightArrow) && x < 8)
+        else if ((Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.D)) && x < 8)
         {
             newX += 1;
         }
-        else if (Input.GetKeyDown(KeyCode.LeftArrow) && x > 0)
+        else if ((Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.A)) && x > 0)
         {
             newX -= 1;
         }

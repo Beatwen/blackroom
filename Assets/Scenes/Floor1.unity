@@ -1154,7 +1154,7 @@ MonoBehaviour:
   AttackDamage: 15
   Name: 
   hasAlreadyHit: 0
-  Life: 720
+  Life: 500
   Mana: 40
   Experience: 0
   Level: 0
