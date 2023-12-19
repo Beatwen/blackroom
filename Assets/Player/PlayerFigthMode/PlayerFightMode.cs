@@ -18,6 +18,7 @@ public class PlayerFightMode : Entity
     private class PlayerData
     {
         public int LifeDisplay;
+        public int ManaDisplay;
     }
     private void PlayAttackSound()
     {
@@ -31,7 +32,9 @@ public class PlayerFightMode : Entity
         }
         playerData = new PlayerData
         {
-            LifeDisplay = this.Life
+            LifeDisplay = Life,
+            ManaDisplay = Mana
+
         };
 
         string json = JsonUtility.ToJson(playerData);
@@ -48,7 +51,9 @@ public class PlayerFightMode : Entity
             string json = File.ReadAllText("PlayerState.json");
             playerData = JsonUtility.FromJson<PlayerData>(json);
             Life = playerData.LifeDisplay;
+            Mana = playerData.ManaDisplay;
             Debug.Log($"Life is restored {playerData.LifeDisplay}");
+            Debug.Log($"Life is restored {playerData.ManaDisplay}");
         }
     }
     protected override void Start()
@@ -57,6 +62,7 @@ public class PlayerFightMode : Entity
         attackAudioSource = GetComponent<AudioSource>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         animator = GetComponent<Animator>();
+        InvokeRepeating("ManaRegen", 1.0f, 2.0f);
         Vector3 startPosition = new Vector3(-6.75f, 2.25f, 0f) ;
         x = startPosition.x;
         y = startPosition.y;
@@ -73,6 +79,10 @@ public class PlayerFightMode : Entity
     void LoadStartMenu()
     {
         SceneManager.LoadScene("StartMenu");
+    }
+    public void ManaRegen()
+    {
+        Mana += 1;
     }
     protected override void Update()
     {
@@ -96,8 +106,9 @@ public class PlayerFightMode : Entity
             animator.SetTrigger("Attack");
             PlayAttackSound();
         }
-        if (Input.GetMouseButtonDown(1))
+        if (Input.GetMouseButtonDown(1) && Mana >= 20)
         {
+            Mana -=20;
             animator.SetTrigger("Attack2");
         }
     }

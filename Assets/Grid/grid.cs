@@ -57,7 +57,7 @@ public class MainGrid : MonoBehaviour
     {
         float random = Random.value;
         int numberOfRooms = (int)Mathf.Floor((random * 2) + 10 + (floorLevel * 6));
-        Debug.Log("We will have " + numberOfRooms + "rooms normally..");
+        Debug.Log("We will have " + numberOfRooms);
 
         InstantiateRoom(3, 5);
         while (rooms.Count < numberOfRooms)
@@ -93,7 +93,6 @@ public class MainGrid : MonoBehaviour
         bool roomExists = rooms.Any(futurRoom => futurRoom.name == room.name);
         if (!roomExists)
         {
-            Debug.Log($"Adding room number: {x}-{y}");
             rooms.Add(room);
         }
         return (x, y);

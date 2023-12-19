@@ -96,15 +96,23 @@ public class Monsters : Entity
 
         if (collide.CompareTag("Weapon") && hasAlreadyHit == false)
         {
-            Debug.Log(++counter);
             PlayerFightMode player = collide.GetComponentInParent<PlayerFightMode>();
             TakeDamage(player.AttackDamage);
             hasAlreadyHit = true;
         }
+        else if (collide.CompareTag("Ouraken") && hasAlreadyHit == false)
+        {
+            PlayerFightMode player = collide.GetComponentInParent<PlayerFightMode>();
+            TakeDamage(player.AttackDamage);
+            TakeDamage(player.AttackDamage);
+            TakeDamage(player.AttackDamage);
+            hasAlreadyHit = true;
+            
+        }
     }
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.CompareTag("Weapon"))
+        if (collision.CompareTag("Weapon") || collision.CompareTag("Ouraken"))
         {
             hasAlreadyHit = false;
         }
