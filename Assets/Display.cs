@@ -3,16 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-public class LifeDisplay : MonoBehaviour
+public class Display : MonoBehaviour
 {
     public int Life;
+    public int Mana;
     public PlayerFightMode player;
     public TMP_InputField textField;
 
     void Start()
     {
-        // If this is the first instance of the LifeDisplay, keep it between scenes
-        if (FindObjectsOfType<LifeDisplay>().Length == 1)
+        if (FindObjectsOfType<Display>().Length == 1)
         {
             DontDestroyOnLoad(gameObject);
         }
@@ -21,10 +21,11 @@ public class LifeDisplay : MonoBehaviour
     void Update()
     {
         Life = player.Life;
+        Mana = player.Mana;
 
         if (textField != null)
         {
-            textField.text = "Life: " + Life.ToString();
+            textField.text = "Life: " + Life.ToString() +"\nMana:" + Mana.ToString();
         }
     }
 }

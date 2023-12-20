@@ -89,7 +89,6 @@
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_FrameRateCounter.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TextConsoleSimulator.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TeleType.cs" />
-    <Compile Include="Assets\LifeDisplay.cs" />
     <Compile Include="Assets\Grid\room.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextEventCheck.cs" />
     <Compile Include="Assets\Grid\GameManager.cs" />
@@ -115,10 +114,12 @@
     <Compile Include="Assets\Monsters\Enemy.cs" />
     <Compile Include="Assets\Player\Spell.cs" />
     <Compile Include="Assets\Player\PlayerFigthMode\WeaponFightMode.cs" />
+    <Compile Include="Assets\Display.cs" />
     <Compile Include="Assets\Grid\ChestRoom.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark03.cs" />
     <Compile Include="Assets\PlayingMusic.cs" />
     <Compile Include="Assets\Player\Player.cs" />
+    <Compile Include="Assets\Menus\Opening.cs" />
     <Compile Include="Assets\Entity\Entity.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextInfoDebugTool.cs" />
     <Compile Include="Assets\Grid\EnemySpawnerFloor1.cs" />
