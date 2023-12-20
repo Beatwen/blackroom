@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Weapon
   - Enemy
+  - Ouraken
   layers:
   - Default
   - TransparentFX
