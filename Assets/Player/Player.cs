@@ -14,8 +14,14 @@ public class Player : Entity
     public float z;
 
     public Inventory PlayerInventory { get; set; }
+    public int Mana { get; set; }  // Propriété pour la mana
 
-
+    // Méthode pour augmenter la mana
+    public void IncreaseMana(int amount)
+    {
+        Mana += amount;
+        // Ajoutez ici une logique pour s'assurer que la mana ne dépasse pas un maximum, si nécessaire
+    }
 
     // Ramasser un objet
     public void PickUpItem(string item)
@@ -28,13 +34,13 @@ public class Player : Entity
     public void UseItem(string item)
     {
         Console.WriteLine($"{Name} utilise {item} !");
+        // Ajoutez ici la logique pour utiliser l'objet (par exemple, si c'est une potion)
     }
 
     // Utiliser un sort
     public void CastSpell(Spell spell)
     {
         Console.WriteLine($"{Name} is casting {spell.Name}.");
-        // V�rifier si assez de mana
         if (Mana >= spell.ManaCost)
         {
             spell.Cast();
@@ -46,15 +52,16 @@ public class Player : Entity
         }
     }
 
-
     public void SetGridReference(MainGrid gridReference)
     {
         grid = gridReference;
     }
+
     public void GainExperience(int experiencePoints)
     {
-        Console.WriteLine($"{Name} gagne {experiencePoints} points d'exp�rience !");
+        Console.WriteLine($"{Name} gagne {experiencePoints} points d'expérience !");
     }
+
     public Transform GetPlayerLocation()
     {
         return transform;
@@ -63,10 +70,8 @@ public class Player : Entity
     protected override void Start()
     {
         base.Start();
-
         if (File.Exists("GridState.json"))
         {
-
             grid.LoadGridState();
             if (grid.player.transform.position != null)
             {
@@ -90,6 +95,7 @@ public class Player : Entity
     {
         return !grid.CheckNeighbourCell(x, y);
     }
+
     public virtual void Move()
     {
         int newX = (int)x;
@@ -126,12 +132,11 @@ public class Player : Entity
                 Debug.Log("Fightroom !!!!");
                 SceneManager.LoadScene($"Floor{grid.floorLevel}");
             }
-            else if (grid.rooms.Any(room => room.coordinate == (newX, newY) &&  room.RoomCat == "BossRoom"))
+            else if (grid.rooms.Any(room => room.coordinate == (newX, newY) && room.RoomCat == "BossRoom"))
             {
                 SceneManager.LoadScene($"Boss{grid.floorLevel}");
             }
         }
-
     }
 
     protected override void Update()
